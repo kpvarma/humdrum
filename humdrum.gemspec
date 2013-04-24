@@ -7,9 +7,9 @@ Gem::Specification.new do |gem|
   gem.name          = "humdrum"
   gem.version       = Humdrum::VERSION
   gem.authors       = ["Krishnan"]
-  gem.email         = ["kvarma@qwinixtech.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.email         = ["krshnaprsad@gmail.com"]
+  gem.description   = %q{humdrum is a collection of useful generators which are quite handy for starting up a project in ruby on rails.}
+  gem.summary       = %q{humdrum creates layouts using bootstrap, HTML5boilerplate, modernizer etc to kick start a project.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
