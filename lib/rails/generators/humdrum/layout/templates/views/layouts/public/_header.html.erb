@@ -1,0 +1,35 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Devaswom</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+					<li class="<%%= nav_active?("home") %>">
+						<%%= link_to raw("Home"), admin_dashboard_path %>
+					</li>
+					<li class="<%%= nav_active?("user") %>">
+						<%%= link_to raw("Users"), admin_users_path %>
+					</li>
+          <li class="<%%= nav_active?("temples") %>">
+						<%%= link_to raw("Temples"), admin_temples_path %>
+					</li>
+          <li class="<%%= nav_active?("devan") %>">
+						<%%= link_to raw("Devan"), admin_devans_path %>
+					</li>
+          <li class="<%%= nav_active?("vazhipadu") %>">
+						<%%= link_to raw("Vazhipadu"), admin_vazhipadus_path %>
+					</li>
+        </ul>
+        <form class="navbar-search pull-right" action="">
+          <input type="text" class="search-query span2" placeholder="Search">
+        </form>
+      </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+  </div><!-- /.navbar-inner -->
+</div><!-- /.navbar -->
+	
