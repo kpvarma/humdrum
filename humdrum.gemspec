@@ -12,8 +12,9 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{humdrum creates layouts using bootstrap, HTML5boilerplate, modernizer etc to kick start a project.}
   gem.homepage      = ""
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.files         = `git ls-files`.split("\n")
+  #gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 end

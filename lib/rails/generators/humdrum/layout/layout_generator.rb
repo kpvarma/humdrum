@@ -19,18 +19,25 @@ module Humdrum
       class_option :public_layout, :type => :boolean, :default => true, :desc => "This will create a public.html.erb which can be used for public pages, not logged in users."
       class_option :admin_layout, :type => :boolean, :default => false, :desc => "This will create a public.html.erb which can be used for admin pages."
       class_option :user_layout, :type => :boolean, :default => false, :desc => "This will create a public.html.erb which can be used for pages shown to a signed in user."
+
+      def remove_index_file
+        remove_file "public/index.html"
+      end
       
       def generate_stylesheets
         if options.stylesheet?
-          copy_file "stylesheets/boilerplate.css.scss", "app/assets/stylesheets/humdrum/boilerplate.css.scss"
-          copy_file "stylesheets/normalize.css.scss", "app/assets/stylesheets/humdrum/normalize.css.scss"
-          copy_file "stylesheets/positioning.css.scss", "app/assets/stylesheets/humdrum/positioning.css.scss"
-          copy_file "stylesheets/palettes.css.scss", "app/assets/stylesheets/humdrum/palettes.css.scss"
-          copy_file "stylesheets/box.css.scss", "app/assets/stylesheets/humdrum/box.css.scss"
-          copy_file "stylesheets/caligraphy.css.scss", "app/assets/stylesheets/humdrum/caligraphy.css.scss"
-          copy_file "stylesheets/dividers.css.scss", "app/assets/stylesheets/humdrum/dividers.css.scss"
-          copy_file "stylesheets/form.css.scss", "app/assets/stylesheets/humdrum/form.css.scss"
-          copy_file "stylesheets/misc.css.scss", "app/assets/stylesheets/humdrum/misc.css.scss"
+          
+          copy_file "stylesheets/bootstrap-overrides.css", "app/assets/stylesheets/bootstrap-overrides.css"
+          copy_file "stylesheets/humdrum/boilerplate.css.scss", "app/assets/stylesheets/humdrum/boilerplate.css.scss"
+          
+          copy_file "stylesheets/humdrum/normalize.css.scss", "app/assets/stylesheets/humdrum/normalize.css.scss"
+          copy_file "stylesheets/humdrum/positioning.css.scss", "app/assets/stylesheets/humdrum/positioning.css.scss"
+          copy_file "stylesheets/humdrum/palettes.css.scss", "app/assets/stylesheets/humdrum/palettes.css.scss"
+          copy_file "stylesheets/humdrum/box.css.scss", "app/assets/stylesheets/humdrum/box.css.scss"
+          copy_file "stylesheets/humdrum/caligraphy.css.scss", "app/assets/stylesheets/humdrum/caligraphy.css.scss"
+          copy_file "stylesheets/humdrum/dividers.css.scss", "app/assets/stylesheets/humdrum/dividers.css.scss"
+          copy_file "stylesheets/humdrum/form.css.scss", "app/assets/stylesheets/humdrum/form.css.scss"
+          copy_file "stylesheets/humdrum/misc.css.scss", "app/assets/stylesheets/humdrum/misc.css.scss"
         end
       end
   
@@ -47,10 +54,16 @@ module Humdrum
           copy_file "images/glyphicons-halflings-white.png", "app/assets/images/glyphicons-halflings-white.png"
         end
       end
-  
+      
+      def generate_helpers
+        copy_file "helpers/navigation_helper.rb", "app/helpers/navigation_helper.rb"
+        copy_file "helpers/meta_tags_helper.rb", "app/helpers/meta_tags_helper.rb"
+      end
+      
       def generate_layout
         template "views/layouts/common/_flash_message.html.erb", "app/views/layouts/common/_flash_message.html.erb"
         template "views/layouts/common/_meta_tags.html.erb", "app/views/layouts/common/_meta_tags.html.erb"
+        template "views/layouts/common/_overlays.html.erb", "app/views/layouts/common/_overlays.html.erb"
     
         if options.admin_layout?
           template "views/layouts/admin.html.erb", "app/views/layouts/admin.html.erb" 

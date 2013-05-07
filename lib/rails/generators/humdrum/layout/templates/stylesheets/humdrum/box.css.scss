@@ -1,0 +1,57 @@
+/* boxes */
+.box {
+  border:1px solid #c1c1c1;
+  border-radius: 4px;
+  margin-bottom: 5px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;
+	
+	-webkit-box-shadow: 2px 2px 5px #c1c1c1;
+	-moz-box-shadow: 2px 2px 5px #c1c1c1;
+	box-shadow: 2px 2px 5px #c1c1c1;
+	
+}
+.box.hoverable:hover, .box.hoverable:active, .box.hoverable:focus, .box.hoverable.selected {
+  background-color:#e5eef6;
+	border-color:#25aae1;
+	
+	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+	-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+	transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+.box.active{
+  background-color:#e5eef6;
+}
+.box-border-blue{
+  border-left: 5px solid #25aae1 !important;
+}
+.box-border-green{
+  border-left: 5px solid #5ebc5e !important;
+}
+.box-border-red{
+  border-left: 5px solid red !important;
+}
+.box-border-yellow{
+  border-left: 5px solid #e9e16d !important;
+}
+.box-border-grey{
+  border-left: 5px solid #989898 !important;
+}
+
+.box-blue{
+  background-color: #25aae1;
+}
+.box-green{
+	background-color: #5ebc5e;
+}
+.box-red{
+	background-color: red;
+}
+.box-yellow{
+	background-color: #e9e16d;
+}
+.box-grey{
+	background-color: #989898;
+}

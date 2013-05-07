@@ -5,28 +5,19 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
 	
-		<title><%= application_name -%></title>
+		<title><%%= title -%></title>
 		
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="copyright" content="Copyright Name" />
-    <meta name="content-language" content="en" />
-    <meta name="author" content="Author Name" />
-    <meta name="resource-type" content="document" />
-    <meta name="distribution" content="global" />
-    <meta name="rating" content="general" />
+    <%%= render :partial=>"/layouts/common/meta_tags" -%>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="icon" href="/assets/favicon.ico" type="image/png">
 
     <%%= stylesheet_link_tag "application", :media => "all" -%>
 
     <%%= csrf_meta_tags -%>
     
-		<%# Modernizr should be loaded first %>
-		<script src="javascripts/modernizr.min.js"></script>
+		<%# Modernizr should be loaded first -%>
+		<script src="/assets/humdrum/modernizr.2.6.2.js"></script>
 
   </head>
 
@@ -48,40 +39,26 @@
 			</div>
     </div>
 		
-		<%%#* Show flash messages if controller has set any. %>
+		<%%#* Show flash messages if controller has set any. -%>
 		<div id="div_flash_message">
-			<%%= render :partial=>"/layouts/common/display_flash" -%>
+			<%%= render :partial=>"/layouts/common/flash_message" -%>
 		</div>
 		
     <div class="container-fluid padding-top-10" style="min-height:400px;">
       <%%= yield %>
     </div>
-
+		
+		<%%#* Display Footer -%>
     <%%= render :partial=>"/layouts/admin/footer" -%>
+		
+		<%%#* Display Hidden Overlays -%>
+    <%%= render :partial=>"/layouts/common/overlays" -%>
 
-		<%%#* Modal for showing popups (in general) %>
-		<div id="div_modal_popup" class="modal wider-modals hide fade" tabindex="-3" role="dialog" aria-labelledby="Show Message" aria-hidden="true"></div>
-		
-		<%%#* Modal for showing popup messages %>
-		<div id="div_modal_popup_message" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="Show Message" aria-hidden="true">
-		  <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="h3_modal_popup_message_header">Modal header</h3></div>
-		  <div class="modal-body"><p>One fine body…</p></div>
-		  <div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Close</button></div>
-		</div>
-		
-		<%%#* Loading Javascripts %>
+		<%%#* Loading Javascripts -%>
     <%%= javascript_include_tag "application" -%>
 
-		<%%#* Google Analytics: change UA-XXXXX-X to be your site's ID. %>
-    <!-- <script>
-      //var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      //(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      //g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      //s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script> -->
-
     <script type='text/javascript'>
-      <%%= yield :js -%>
+      <%%= yield :javascript -%>
     </script>
 
   </body>
