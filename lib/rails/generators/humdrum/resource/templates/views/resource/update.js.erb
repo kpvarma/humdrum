@@ -1,0 +1,14 @@
+<%% if @<%= instance_name %>.errors.blank? %>
+	
+	// Fill the right box with first item details
+  $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>"show")) %>");
+	
+	// Refresh the updated item in the list
+  $("#div_<%= instance_name %>_item_<%%= @<%= instance_name %>.id %>").html("<%%= escape_javascript(render :partial => 'item', :locals => { :item => @<%= instance_name %> }) %>")
+
+<%% else %>
+	
+	// Reload the form partial to display errors
+  $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>"edit")) %>");
+
+<%% end %>

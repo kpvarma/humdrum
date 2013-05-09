@@ -1,0 +1,14 @@
+<%% if @<%= instance_name %>.errors.blank? %>
+	
+	// Fill the right box with first <%= instance_name %> details
+	$('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>'show')) %>");
+	
+	// Add the newly created item to the list
+  $("#div_<%= instance_name %>_item").prepend("<div id=\"div_item_<%= instance_name %>_<%%= @<%= instance_name %>.id %>\"><%%= escape_javascript(render(:partial => 'item', :locals => { :item => @<%= instance_name %> })) %></div>")
+
+<%% else %>
+	
+	// Reload the form partial to display errors
+  $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>'new')) %>");
+	
+<%% end %>

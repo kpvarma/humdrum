@@ -17,4 +17,8 @@ Gem::Specification.new do |gem|
   gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+  
+  gem.add_development_dependency 'rails', '~> 3.0.0'
+  gem.add_development_dependency 'rainbow'
+  
 end

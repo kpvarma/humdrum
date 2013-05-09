@@ -1,0 +1,10 @@
+
+<%%# describes about each <%= instance_name %> %>
+<div class="box hoverable padding-10 box-border-black">
+	<div class="pull-left width-30"><%%= link_to <%= instance_name %>.name, <%= resource_link('new', 'path') %>(<%= instance_name %>), :remote=>true, :class=>"font-size-13" %>
+	</br>
+	<%%= <%= instance_name %>.model %>
+	</div>
+	<div class="pull-left width-60"><%%= <%= instance_name %>.description[0..100] %></div>
+	<div class="cl"></div>
+</div>

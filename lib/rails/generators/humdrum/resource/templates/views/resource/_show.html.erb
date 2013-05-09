@@ -1,0 +1,31 @@
+
+<%%# Displays a detailed view of the item %>
+<%%# Display Flash Message if any only in case of ajax request %>
+<%% if request.xhr? %>
+	<%%= render :partial=>"layouts/common/flash_message" %>
+<%% end %>
+
+<div class="box padding-10">
+	
+	<div class="margin-10 text-color-blue font-size-22">
+		<%%= @<%= instance_name %>.name %>
+	</div>
+	<div class="margin-left-10">
+		Model: <%%= link_to @<%= instance_name %>.model, "#", :class=>"text-color-red" %>
+	</div>
+	<div class="margin-left-10">
+		Age: <%%= @<%= instance_name %>.age %>
+	</div>
+	<div class="margin-left-10">
+		Price: <%%= @<%= instance_name %>.cost %>
+	</div>
+	
+	<div class='italic margin-10'><%%= simple_format @<%= instance_name %>.description %></div>
+	
+  <div class="palette-footer">
+    <%%= link_to raw("<i class=\"icon-pencil icon-white margin-right-5\"></i> Edit"), <%= resource_link('edit', 'path') %>(@<%= instance_name %>), :class=>"btn btn-inverse btn-mini pull-right margin-left-10", :remote=>true %>
+    <%%= link_to raw("<i class=\"icon-remove \"></i> Delete"), item<%= resource_link('new', 'path') %>(@<%= instance_name %>), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-mini pull-right", :remote=>true %>
+    <div class="cl-10"></div>
+  </div>
+
+</div>
