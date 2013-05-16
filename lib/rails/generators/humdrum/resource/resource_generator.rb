@@ -18,36 +18,13 @@ module Humdrum
       argument :resource_name, :type=>:string
       argument :fields, :type=>:hash, :banner =>"Resource Fields."
       
-      #class_option :layout_name, :type => :string, :default => "public", :desc => "The controllers will use this layout while rendering the views"
-
+      class_option :debug, :type => :boolean, :default => false, :desc => "This will print the arguments for debugging"
+      
+      def debug_args
+        print_args if options.debug?
+      end
+      
       def generate_controllers
-        
-        puts ":fields: #{fields}"
-        puts "name_phrases: #{name_phrases}"
-        puts "controller_path: #{controller_path}"
-        puts "controller_class: #{controller_class}"
-        puts "model_path: #{model_path}"
-        puts "model_class: #{model_class}"
-        puts "instance_name: #{instance_name}"
-        puts "instances_name: #{instances_name}"
-        puts "table_name: #{table_name}"
-        
-        puts "index path: #{resource_link}"
-        puts "show path: #{resource_link('show')}"
-        puts "new path: #{resource_link('new')}"
-        puts "edit path: #{resource_link('edit')}"
-        puts "create path: #{resource_link('create')}"
-        puts "update path: #{resource_link('update')}"
-        puts "destroy path: #{resource_link('destroy')}"
-        
-        puts "index url: #{resource_link('index','url')}"
-        puts "show url: #{resource_link('show','url')}"
-        puts "new url: #{resource_link('new','url')}"
-        puts "edit url: #{resource_link('edit','url')}"
-        puts "create url: #{resource_link('create','url')}"
-        puts "update url: #{resource_link('update','url')}"
-        puts "destroy url: #{resource_link('destroy','url')}"
-        
         template "controllers/resource_controller.rb", "app/controllers/#{controller_path}_controller.rb"
       end
       
@@ -87,7 +64,40 @@ module Humdrum
         }
       end
       
+      def generate_locales
+        template "config/locales/humdrum.en.yml", "config/locales/humdrum.en.yml"
+      end
+      
       private
+      
+      def print_args
+        puts ":fields: #{fields}"
+        puts ":form_link_param: #{form_link_param}"
+        puts "name_phrases: #{name_phrases}"
+        puts "controller_path: #{controller_path}"
+        puts "controller_class: #{controller_class}"
+        puts "model_path: #{model_path}"
+        puts "model_class: #{model_class}"
+        puts "instance_name: #{instance_name}"
+        puts "instances_name: #{instances_name}"
+        puts "table_name: #{table_name}"
+        
+        puts "index path: #{resource_link}"
+        puts "show path: #{resource_link('show')}"
+        puts "new path: #{resource_link('new')}"
+        puts "edit path: #{resource_link('edit')}"
+        puts "create path: #{resource_link('create')}"
+        puts "update path: #{resource_link('update')}"
+        puts "destroy path: #{resource_link('destroy')}"
+        
+        puts "index url: #{resource_link('index','url')}"
+        puts "show url: #{resource_link('show','url')}"
+        puts "new url: #{resource_link('new','url')}"
+        puts "edit url: #{resource_link('edit','url')}"
+        puts "create url: #{resource_link('create','url')}"
+        puts "update url: #{resource_link('update','url')}"
+        puts "destroy url: #{resource_link('destroy','url')}"
+      end
       
       def name_phrases
         if resource_name.include?('::')
@@ -152,13 +162,67 @@ module Humdrum
         words = name_phrases
         resource = words.pop
         if actn == "index"
-          
-          map[actn] + words.join("_") + "_" + resource.pluralize + "_" + ltype
+          map[actn] + (words.any? ? words.join("_" + "_") : "") + resource.pluralize + "_" + ltype
         else
-          map[actn] + words.join("_") + "_" + resource + "_" + ltype
+          map[actn] + (words.any? ? words.join("_") + "_" : "") + resource + "_" + ltype
         end
       end 
-       
+      
+      def form_link_param
+        words = name_phrases
+        resource = words.pop
+        if words.any?
+          # to print like this [:admin, :user, :location, @chakka]
+          # in form.html.erb
+          "[" + (words.map{|x| ":" + x.downcase} << "@" + resource.downcase).join(", ") + "]"
+        else
+          "@#{resource.downcase}"
+        end
+      end
+      
+      def input_type(name, type)
+        if name.include?("email") && type == "string"
+          return "email"
+        elsif name.include?("password") && type == "string"
+          return "password"
+        elsif (name.include?("phone") || name.include?("mobile")) && type == "string"
+          return "tel"
+        else
+          case type
+          when "string"
+            "text"
+          when "text"
+            "textarea"
+          when "integer"
+            "number"
+          when "references"
+            "type"
+          when "date"
+            "date"
+          when "datetime"
+            "datetime-local"
+          when "timestamp", "time"
+            "time"
+          end
+        end
+      end
+      
+      ## List of all the string fields 
+      def string_fields
+        main_field = main_string_field
+        fields.map{|name, type| name if name != main_field && type == "string" }.uniq.compact
+      end
+      
+      ## The main string field like 'name'
+      def main_string_field
+        fields.map{|name, type| name if name.include?("name") && type == "string"}.uniq.compact || fields.keys.any? ? fields.keys.first : "id"
+      end
+      
+      ## Text Fields like description or summary
+      def text_fields
+        fields.map{|name, type| name if type == "text"}.uniq.compact
+      end
+    	
     end
   end
 end

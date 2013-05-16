@@ -14,3 +14,10 @@
 	6. pricing page
 	7. custom static page
 6. Create a button set with colors. 
+7. Work with i18n
+	1. Load default text in locales/humdrum/en.yml
+	
+	
+## Bugs to be fixed
+
+The close icon is not responding for alert boxes - especially while showing ajax flash messages.

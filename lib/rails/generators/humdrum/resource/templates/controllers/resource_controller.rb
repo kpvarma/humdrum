@@ -68,7 +68,7 @@ class <%= controller_class %> < ApplicationController
         @<%= instance_name %>.save
         
         # Setting the flash message
-        message = translate("admin.<%= instance_name %>.create_successfully")
+        message = translate("forms.created_successfully", :item => "<%= instance_name.titleize %>")
         store_flash_message(message, :success)
         
         format.html { 
@@ -109,7 +109,7 @@ class <%= controller_class %> < ApplicationController
         @<%= instance_name %>.save
         
         # Setting the flash message
-        message = translate("admin.<%= instance_name %>.update_successfully")
+        message = translate("forms.updated_successfully", :item => "<%= instance_name.titleize %>")
         store_flash_message(message, :success)
         
         format.html { 
@@ -150,7 +150,7 @@ class <%= controller_class %> < ApplicationController
       @<%= instance_name %> = @<%= instances_name %>.first
       
       # Setting the flash message
-      message = translate("admin.<%= instance_name %>.destroy_successfully")
+      message = translate("forms.destroyed_successfully", :item => "<%= instance_name.titleize %>")
       store_flash_message(message, :success)
       
       format.html { 

@@ -58,6 +58,7 @@ module Humdrum
       def generate_helpers
         copy_file "helpers/navigation_helper.rb", "app/helpers/navigation_helper.rb"
         copy_file "helpers/meta_tags_helper.rb", "app/helpers/meta_tags_helper.rb"
+        copy_file "helpers/display_helper.rb", "app/helpers/display_helper.rb"
       end
       
       def generate_layout

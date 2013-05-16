@@ -4,7 +4,7 @@
   $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>"show")) %>");
 	
 	// Refresh the updated item in the list
-  $("#div_<%= instance_name %>_item_<%%= @<%= instance_name %>.id %>").html("<%%= escape_javascript(render :partial => 'item', :locals => { :item => @<%= instance_name %> }) %>")
+  $("#div_<%= instance_name %>_<%%= @<%= instance_name %>.id %>").html("<%%= escape_javascript(render :partial => 'item', :locals => { :<%= instance_name %> => @<%= instance_name %> }) %>")
 
 <%% else %>
 	
