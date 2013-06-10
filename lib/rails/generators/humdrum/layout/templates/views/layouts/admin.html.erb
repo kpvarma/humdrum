@@ -16,7 +16,7 @@
 
     <%%= csrf_meta_tags -%>
     
-		<%# Modernizr should be loaded first -%>
+		<%%# Modernizr should be loaded first -%>
 		<script src="/assets/humdrum/modernizr.2.6.2.js"></script>
 
   </head>
@@ -44,7 +44,7 @@
 			<%%= render :partial=>"/layouts/common/flash_message" -%>
 		</div>
 		
-    <div class="container-fluid padding-top-10" style="min-height:400px;">
+    <div class="<%= container_class %> padding-top-10" style="min-height:400px;">
       <%%= yield %>
     </div>
 		

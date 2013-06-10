@@ -18,6 +18,7 @@ module Humdrum
       argument :resource_name, :type=>:string
       argument :fields, :type=>:hash, :banner =>"Resource Fields."
       
+      class_option :fluid, :type => :boolean, :default => true, :desc => "Pass true to create fluid layouts"
       class_option :debug, :type => :boolean, :default => false, :desc => "This will print the arguments for debugging"
       
       def debug_args
@@ -223,6 +224,14 @@ module Humdrum
         fields.map{|name, type| name if type == "text"}.uniq.compact
       end
     	
+      def container_class
+        options.fluid? ? "container-fluid" : "container"
+      end
+      
+      def row_class
+        options.fluid? ? "row-fluid" : "row"
+      end
+      
     end
   end
 end

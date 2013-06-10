@@ -9,7 +9,7 @@ module TitleHelper
   end
   
   def title
-    @title || <%= application_name %>
+    @title || "<%= application_name -%>"
   end
   
 end

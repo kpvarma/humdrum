@@ -12,6 +12,8 @@ module Humdrum
       argument :layout_name, :type=>:string, :default => "application"
       argument :application_name, :type=>:string, :default => "Application Name"
   
+      class_option :fluid, :type => :boolean, :default => true, :desc => "Pass true to create fluid layouts"
+      
       class_option :stylesheet, :type => :boolean, :default => true, :desc => "This will not generate the stylesheets"
       class_option :javascript, :type => :boolean, :default => true, :desc => "This will not generate the javascripts"
       class_option :graphics, :type => :boolean, :default => true, :desc => "This will not generate the graphics"
@@ -27,7 +29,12 @@ module Humdrum
       def generate_stylesheets
         if options.stylesheet?
           
-          copy_file "stylesheets/bootstrap-overrides.css", "app/assets/stylesheets/bootstrap-overrides.css"
+          
+          copy_file "stylesheets/bootstrap.css", "app/assets/stylesheets/bootstrap.css"
+          copy_file "stylesheets/bootstrap-responsive.css", "app/assets/stylesheets/bootstrap-responsive.css"
+          # Its named overrides-bootstrap so that it loads after bootstrap.css
+          copy_file "stylesheets/overrides-bootstrap.css", "app/assets/stylesheets/overrides-bootstrap.css"
+          
           copy_file "stylesheets/humdrum/boilerplate.css.scss", "app/assets/stylesheets/humdrum/boilerplate.css.scss"
           
           copy_file "stylesheets/humdrum/normalize.css.scss", "app/assets/stylesheets/humdrum/normalize.css.scss"
@@ -43,6 +50,7 @@ module Humdrum
   
       def generate_javascripts
         if options.javascript?
+          copy_file "javascripts/bootstrap.js", "app/assets/javascripts/humdrum/bootstrap.js"
           copy_file "javascripts/modernizr.2.6.2.js", "app/assets/javascripts/humdrum/modernizr.2.6.2.js"
         end
       end
@@ -56,9 +64,10 @@ module Humdrum
       end
       
       def generate_helpers
-        copy_file "helpers/navigation_helper.rb", "app/helpers/navigation_helper.rb"
-        copy_file "helpers/meta_tags_helper.rb", "app/helpers/meta_tags_helper.rb"
-        copy_file "helpers/display_helper.rb", "app/helpers/display_helper.rb"
+        template "helpers/title_helper.rb", "app/helpers/title_helper.rb"
+        template "helpers/navigation_helper.rb", "app/helpers/navigation_helper.rb"
+        template "helpers/meta_tags_helper.rb", "app/helpers/meta_tags_helper.rb"
+        template "helpers/display_helper.rb", "app/helpers/display_helper.rb"
       end
       
       def generate_layout
@@ -90,6 +99,7 @@ module Humdrum
       end
     
       def generate_controllers
+        template "controllers/application_controller.rb", "app/controllers/application_controller.rb"
         template "controllers/welcome_controller.rb", "app/controllers/welcome_controller.rb" if options.public_layout?
         template "controllers/public_controller.rb", "app/controllers/public_controller.rb" if options.public_layout?
         template "controllers/user_controller.rb", "app/controllers/user_controller.rb" if options.user_layout?
@@ -109,7 +119,15 @@ module Humdrum
       def file_name
         layout_name.underscore
       end
-  
+      
+      def container_class
+        options.fluid? ? "container-fluid" : "container"
+      end
+      
+      def row_class
+        options.fluid? ? "row-fluid" : "row"
+      end
+      
     end
   end
 end
