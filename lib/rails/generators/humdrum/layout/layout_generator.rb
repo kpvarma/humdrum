@@ -12,7 +12,7 @@ module Humdrum
       argument :layout_name, :type=>:string, :default => "application"
       argument :application_name, :type=>:string, :default => "Application Name"
   
-      class_option :fluid, :type => :boolean, :default => true, :desc => "Pass true to create fluid layouts"
+      class_option :fluid, :type => :boolean, :default => true, :desc => "Pass false to create fixed layouts. Default is true"
       
       class_option :stylesheet, :type => :boolean, :default => true, :desc => "This will not generate the stylesheets"
       class_option :javascript, :type => :boolean, :default => true, :desc => "This will not generate the javascripts"
