@@ -6,6 +6,7 @@ require 'humdrum/version'
 Gem::Specification.new do |gem|
   
   gem.name          = "humdrum-rails"
+  gem.email         = "krishnaprasadvarma@gmail.com"
   gem.version       = Humdrum::VERSION
   gem.platform      = Gem::Platform::RUBY
   gem.authors       = ["Krishnan"]
