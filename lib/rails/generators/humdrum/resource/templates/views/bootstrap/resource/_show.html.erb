@@ -1,0 +1,38 @@
+
+<%%# Displays a detailed view of the <%= instance_name %> %>
+<%%# Display Flash Message if any only in case of ajax request %>
+<%% if request.xhr? %>
+	<%%= render :partial=>"layouts/common/flash_message" %>
+<%% end %>
+
+<div class="box padding-10">
+	
+	<div class="margin-10 text-color-blue font-size-22">
+		<%%= @<%= instance_name %>.<%= main_string_field %> %>
+	</div>
+	
+	<%- string_fields.each do |name| -%>
+		<% next if name == main_string_field %>
+	<div class="margin-left-10">
+		<%= name.titleize %>: <%%= link_to @<%= instance_name %>.<%= name %>, "#", :class=>"text-color-red" %>
+	</div>
+	<%- end -%>
+	<% puts fields %>
+	<%- fields.map{|name, type| name unless ["text", "string"].include?(type)}.compact.uniq.each do |name| -%>
+	<div class="margin-left-10">
+		<%= name.titleize %>: <%%= @<%= instance_name %>.<%= name %> %>
+	</div>
+	<%- end -%>
+	
+	<%- text_fields.each do |name| -%>
+	<div class='italic margin-10'><%%= simple_format @<%= instance_name %>.<%= name %> %></div>
+	<%- end -%>
+	
+  <div class="palette-footer margin-left-10">
+    <%%= display_time(@<%= instance_name %>.created_at, "pull-left text-color-grey") %>
+    <%%= link_to raw("<i class=\"icon-pencil icon-white margin-right-5\"></i> Edit"), <%= resource_link('edit', 'path') %>(@<%= instance_name %>), :class=>"btn btn-inverse btn-mini pull-right margin-left-10", :remote=>true %>
+    <%%= link_to raw("<i class=\"icon-remove \"></i> Delete"), <%= resource_link('destroy', 'path') %>(@<%= instance_name %>), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-mini pull-right", :remote=>true %>
+    <div class="cl-10"></div>
+  </div>
+
+</div>

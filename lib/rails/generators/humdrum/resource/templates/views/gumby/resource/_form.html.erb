@@ -1,0 +1,44 @@
+
+<%%# Renders a partial which is used to create a new <%= instance_name %> %>
+<%%= simple_form_for(<%= form_link_param %>, :html => {:class=>"form-vertical", :style => "margin-bottom:0px;", :method => (@<%= instance_name %>.new_record? ? :post : :put), :remote=>true}) do |f| %>
+
+  <%%= f.error_notification %>
+  <%%= @<%= instance_name %>.errors[:base].to_sentence %>
+
+  <div class="form-inputs">
+		
+    <%- fields.each do |name, type| -%>
+    <% if type == "text" %>
+		  <%%= f.input :<%= name %>, :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;", :rows=>"8"} %>
+    <% else %>
+      <%%= f.input :<%= name %>, :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
+    <% end %>
+    <%- end -%>
+		
+    <%%#= f.input :name, :placeholder => 'Enter Item Name', :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
+
+    <%%#= f.input :age, :required => false, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
+		
+		<%%#= f.input :description, :as => :text, :placeholder => 'Add Description for the Item', :input_html => {  :rows => 6, :style => "width:95%;height:200px;  margin-bottom:5px;" } %>
+		
+		<%%#= f.input :cost, :hint => 'Enter Item Cost', :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
+		
+		<%%# list = ['2010 - Margaret Blue', 'Agenta Black', 'Margaret Blue', 'Crimson Yellow', 'Scarlet Red', 'Peacock Blue'] %>
+		<%%#= f.input :model, :as => :select, :collection => list, :input_html=>{:class=>"select2 prompt", :style=>"width:100%;"}, :selected => [ "Scarlet Red" ] %>
+		
+  </div>
+	<div class="cl-10"></div>
+	
+	<%% button_text = "#{@<%= instance_name %>.new_record? ? "Create" : "Update"} Item" %>
+   <div class="pull-right">
+			<%% if @<%= instance_name %>.new_record? %>
+				<%%= link_to "Cancel", "#", :class => "pretty medium default btn", :remote=>true %>
+			<%% else %>
+				<%%= link_to 'Back', <%= resource_link('index', 'path') %>, :class=>"pretty medium primary btn margin-left-10", :remote => true unless @<%= instance_name %>.new_record? %>
+			<%% end %>
+     	<%%= f.submit button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"pretty primary btn margin-left-10" %>
+   </div>
+	<div class="cl-10"></div>
+		
+<%% end %>
+

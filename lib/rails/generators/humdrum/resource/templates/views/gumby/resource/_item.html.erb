@@ -1,0 +1,21 @@
+<%%# describes about each <%= instance_name %> %>
+<div class="box hoverable padding-10 box-border-black">
+	
+  <div class="pull-left width-30">
+    <%%= link_to <%= instance_name %>.<%= main_string_field %>, <%= resource_link('show', 'path') %>(<%= instance_name %>), :remote=>true, :class=>"font-size-13" %></br>
+	
+    <div class="text-color-grey">
+      <%%= display_time(<%= instance_name %>.created_at) %>
+    </div>
+	
+	</div>
+  
+	<div class="pull-left width-60">
+	<%- text_fields.each do |name| -%>
+	  <%%= scrap_word(<%= instance_name %>.<%= name %>, 200) %>
+	<%- end -%>
+	</div>
+  
+	<div class="cl"></div>
+	
+</div>
