@@ -22,7 +22,7 @@ module Humdrum
       class_option :admin_layout, :type => :boolean, :default => false, :desc => "This will create a public.html.erb which can be used for admin pages."
       class_option :user_layout, :type => :boolean, :default => false, :desc => "This will create a public.html.erb which can be used for pages shown to a signed in user."
       
-      class_option :front_end_framework, :type => :string, :default => 'bootstrap', :desc => "Support Twitter Bootstrap (twitter.github.io/bootstrap/) and Gumpy (http://gumbyframework.com/). Default is bootstrap. Pass gumby for Gumby Framework"
+      class_option :front_end_framework, :type => :string, :default => 'gumby', :desc => "Support Twitter Bootstrap (twitter.github.io/bootstrap/) and Gumpy (http://gumbyframework.com/). Default is bootstrap. Pass gumby for Gumby Framework"
       
       ## Parse from config file
       #class_option :config_file, :type => :string, :desc => "Parse options from the config file."

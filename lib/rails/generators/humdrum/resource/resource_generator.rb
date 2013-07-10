@@ -21,6 +21,8 @@ module Humdrum
       class_option :fluid, :type => :boolean, :default => true, :desc => "Pass true to create fluid layouts"
       class_option :debug, :type => :boolean, :default => false, :desc => "This will print the arguments for debugging"
       
+      class_option :front_end_framework, :type => :string, :default => 'gumby', :desc => "Support Twitter Bootstrap (twitter.github.io/bootstrap/) and Gumpy (http://gumbyframework.com/). Default is bootstrap. Pass gumby for Gumby Framework"
+      
       def debug_args
         print_args if options.debug?
       end
@@ -30,23 +32,23 @@ module Humdrum
       end
       
       def generate_views
-        template "views/resource/_edit.html.erb", "app/views/#{controller_path}/_edit.html.erb"
-        template "views/resource/_filters.html.erb", "app/views/#{controller_path}/_filters.html.erb"
-        template "views/resource/_form.html.erb", "app/views/#{controller_path}/_form.html.erb"
-        template "views/resource/_index.html.erb", "app/views/#{controller_path}/_index.html.erb"
-        template "views/resource/_item.html.erb", "app/views/#{controller_path}/_item.html.erb"
-        template "views/resource/_nav_filters.html.erb", "app/views/#{controller_path}/_nav_filters.html.erb"
-        template "views/resource/_new.html.erb", "app/views/#{controller_path}/_new.html.erb"
-        template "views/resource/_show.html.erb", "app/views/#{controller_path}/_show.html.erb"
-        template "views/resource/_summary.html.erb", "app/views/#{controller_path}/_summary.html.erb"
-        template "views/resource/create.js.erb", "app/views/#{controller_path}/create.js.erb"
-        template "views/resource/destroy.js.erb", "app/views/#{controller_path}/destroy.js.erb"
-        template "views/resource/edit.js.erb", "app/views/#{controller_path}/edit.js.erb"
-        template "views/resource/index.js.erb", "app/views/#{controller_path}/index.js.erb"
-        template "views/resource/new.js.erb", "app/views/#{controller_path}/new.js.erb"
-        template "views/resource/show.js.erb", "app/views/#{controller_path}/show.js.erb"
-        template "views/resource/update.js.erb", "app/views/#{controller_path}/update.js.erb"
-        template "views/resource/index.html.erb", "app/views/#{controller_path}/index.html.erb"
+        template "views/#{options.front_end_framework}/resource/_edit.html.erb", "app/views/#{controller_path}/_edit.html.erb"
+        template "views/#{options.front_end_framework}/resource/_filters.html.erb", "app/views/#{controller_path}/_filters.html.erb"
+        template "views/#{options.front_end_framework}/resource/_form.html.erb", "app/views/#{controller_path}/_form.html.erb"
+        template "views/#{options.front_end_framework}/resource/_index.html.erb", "app/views/#{controller_path}/_index.html.erb"
+        template "views/#{options.front_end_framework}/resource/_item.html.erb", "app/views/#{controller_path}/_item.html.erb"
+        template "views/#{options.front_end_framework}/resource/_nav_filters.html.erb", "app/views/#{controller_path}/_nav_filters.html.erb"
+        template "views/#{options.front_end_framework}/resource/_new.html.erb", "app/views/#{controller_path}/_new.html.erb"
+        template "views/#{options.front_end_framework}/resource/_show.html.erb", "app/views/#{controller_path}/_show.html.erb"
+        template "views/#{options.front_end_framework}/resource/_summary.html.erb", "app/views/#{controller_path}/_summary.html.erb"
+        template "views/#{options.front_end_framework}/resource/create.js.erb", "app/views/#{controller_path}/create.js.erb"
+        template "views/#{options.front_end_framework}/resource/destroy.js.erb", "app/views/#{controller_path}/destroy.js.erb"
+        template "views/#{options.front_end_framework}/resource/edit.js.erb", "app/views/#{controller_path}/edit.js.erb"
+        template "views/#{options.front_end_framework}/resource/index.js.erb", "app/views/#{controller_path}/index.js.erb"
+        template "views/#{options.front_end_framework}/resource/new.js.erb", "app/views/#{controller_path}/new.js.erb"
+        template "views/#{options.front_end_framework}/resource/show.js.erb", "app/views/#{controller_path}/show.js.erb"
+        template "views/#{options.front_end_framework}/resource/update.js.erb", "app/views/#{controller_path}/update.js.erb"
+        template "views/#{options.front_end_framework}/resource/index.html.erb", "app/views/#{controller_path}/index.html.erb"
       end
       
       def generate_models
@@ -225,11 +227,78 @@ module Humdrum
       end
     	
       def container_class
-        options.fluid? ? "container-fluid" : "container"
+        if options.front_end_framework == "bootstrap"
+          options.fluid? ? "container-fluid" : "container"
+        elsif options.front_end_framework == "gumby"
+          "container"
+        else
+          "container"
+        end
       end
       
       def row_class
-        options.fluid? ? "row-fluid" : "row"
+        if options.front_end_framework == "bootstrap"
+          options.fluid? ? "row-fluid" : "row"
+        elsif options.front_end_framework == "gumby"
+          "row"
+        else
+          "row"
+        end
+      end
+      
+      def column_class(grid_width_value)
+        grid_width_value_hash = {"1" => "one", 
+                                 "2" => "two",
+                                 "3" => "three",
+                                 "4" => "four",
+                                 "5" => "five",
+                                 "6" => "six",
+                                 "7" => "seven",
+                                 "8" => "eight",
+                                 "9" => "nine",
+                                 "10" => "ten",
+                                 "11" => "eleven",
+                                 "12" => "twelve",
+                                 "13" => "thirteen",
+                                 "14" => "fourteen",
+                                 "15" => "fifteen",
+                                 "16" => "sixteen"}
+        if options.front_end_framework == "bootstrap"
+          "span#{grid_width_value}"
+        elsif options.front_end_framework == "gumby"
+          "#{grid_width_value_hash[grid_width_value.to_s]} columns"
+        else
+          "col#{grid_width_value}"
+        end
+      end
+      
+      def button_class(color, size, rounded="", pretty="")
+        if options.front_end_framework == "bootstrap"
+          color_hash = {"blue" => "btn-primary", 
+                       "light-blue" => "btn-info",
+                       "grey" => "",
+                       "black" => "btn-inverse",
+                       "red" => "btn-danger",
+                       "green" => "btn-success",
+                       "orange" => "btn-warning"}
+          size_hash = {"large" => "btn-large",
+                      "medium" => "",
+                      "small" => "btn-tiny"}
+        elsif options.front_end_framework == "gumby"
+          color_hash = {"blue" => "primary", 
+                       "dark-green" => "secondary",
+                       "grey" => "default",
+                       "black" => "info",
+                       "red" => "danger",
+                       "green" => "success",
+                       "orange" => "warning"}
+           size_hash = {"xlarge" => "xlarge", 
+                       "large" => "large",
+                       "medium" => "medium",
+                       "small" => "small",
+                       "green" => "btn-success"}
+        end
+        "#{pretty.blank? ? "" : "#{pretty} "}#{rounded.blank? ? "" : "#{rounded} "}#{size_hash[size]} #{color_hash[color]} btn"
       end
       
     end

@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rails', '~> 3.0.0'
   gem.add_development_dependency 'rainbow'
   gem.add_development_dependency 'rainbow'
-  gem.add_development_dependency 'handy-css-rails', '0.0.3'
+  gem.add_development_dependency 'handy-css-rails', '0.0.4'
   
   
 end
