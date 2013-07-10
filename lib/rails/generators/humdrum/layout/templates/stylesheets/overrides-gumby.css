@@ -1,0 +1,11 @@
+/* 
+  Ensure that you load this file in application.css after gumby (backword slash to escape)
+*/
+
+body {font-size:12px;}
+
+/* handy CSS will insist a margin and padding for all ul and li. Overriding handy css behaviour for ul and li in .navbar class*/
+.navbar ul, .navbar ul > li, .navbar ul > li > div.dropdown > ul {margin:0px !important; padding:0px !important;}
+
+/* logo left padding is not required */
+.navbar .logo a {padding:0px; color:#fff;}

@@ -9,9 +9,9 @@ module Humdrum
            "Pass --user_layout to generate another layout for users who are signed in." <<
            "Pass --admin_layout to generate another layout for admin users."
                  
-      argument :layout_name, :type=>:string, :default => "application"
       argument :application_name, :type=>:string, :default => "Application Name"
-  
+      #argument :layout_name, :type=>:string, :default => "application"
+      
       class_option :fluid, :type => :boolean, :default => true, :desc => "Pass false to create fixed layouts. Default is true"
       
       class_option :stylesheet, :type => :boolean, :default => true, :desc => "This will not generate the stylesheets"
@@ -21,7 +21,21 @@ module Humdrum
       class_option :public_layout, :type => :boolean, :default => true, :desc => "This will create a public.html.erb which can be used for public pages, not logged in users."
       class_option :admin_layout, :type => :boolean, :default => false, :desc => "This will create a public.html.erb which can be used for admin pages."
       class_option :user_layout, :type => :boolean, :default => false, :desc => "This will create a public.html.erb which can be used for pages shown to a signed in user."
-
+      
+      class_option :front_end_framework, :type => :string, :default => 'bootstrap', :desc => "Support Twitter Bootstrap (twitter.github.io/bootstrap/) and Gumpy (http://gumbyframework.com/). Default is bootstrap. Pass gumby for Gumby Framework"
+      
+      ## Parse from config file
+      #class_option :config_file, :type => :string, :desc => "Parse options from the config file."
+      
+      #@@config = nil
+  
+      #def config
+      #  args = options.dup
+      #  args.config_file ||= '.csvconverter.yaml'
+      #
+      #  config = YAML::load File.open(args[:file], 'r')
+      #end
+  
       def remove_index_file
         remove_file "public/index.html"
       end
@@ -29,22 +43,24 @@ module Humdrum
       def generate_stylesheets
         if options.stylesheet?
           
+          template "stylesheets/application.css", "app/assets/stylesheets/application.css"
           
-          copy_file "stylesheets/bootstrap.css", "app/assets/stylesheets/bootstrap.css"
-          copy_file "stylesheets/bootstrap-responsive.css", "app/assets/stylesheets/bootstrap-responsive.css"
-          # Its named overrides-bootstrap so that it loads after bootstrap.css
-          copy_file "stylesheets/overrides-bootstrap.css", "app/assets/stylesheets/overrides-bootstrap.css"
+          if options.front_end_framework == "bootstrap"
+            
+            # Copy bootstrap css file
+            copy_file "stylesheets/bootstrap.css", "app/assets/stylesheets/bootstrap.css"
+            
+            # Its named overrides-bootstrap so that it loads after bootstrap.css
+            copy_file "stylesheets/overrides-bootstrap.css", "app/assets/stylesheets/overrides-bootstrap.css"
+          elsif options.front_end_framework == "gumby"
+            
+            # Copy gumby css file
+            copy_file "stylesheets/gumby.css", "app/assets/stylesheets/gumby.css"
+            
+            # Its named overrides-gumby so that it loads after gumby.css
+            copy_file "stylesheets/overrides-gumby.css", "app/assets/stylesheets/overrides-gumby.css"
+          end
           
-          copy_file "stylesheets/humdrum/boilerplate.css.scss", "app/assets/stylesheets/humdrum/boilerplate.css.scss"
-          
-          copy_file "stylesheets/humdrum/normalize.css.scss", "app/assets/stylesheets/humdrum/normalize.css.scss"
-          copy_file "stylesheets/humdrum/positioning.css.scss", "app/assets/stylesheets/humdrum/positioning.css.scss"
-          copy_file "stylesheets/humdrum/palettes.css.scss", "app/assets/stylesheets/humdrum/palettes.css.scss"
-          copy_file "stylesheets/humdrum/box.css.scss", "app/assets/stylesheets/humdrum/box.css.scss"
-          copy_file "stylesheets/humdrum/caligraphy.css.scss", "app/assets/stylesheets/humdrum/caligraphy.css.scss"
-          copy_file "stylesheets/humdrum/dividers.css.scss", "app/assets/stylesheets/humdrum/dividers.css.scss"
-          copy_file "stylesheets/humdrum/form.css.scss", "app/assets/stylesheets/humdrum/form.css.scss"
-          copy_file "stylesheets/humdrum/misc.css.scss", "app/assets/stylesheets/humdrum/misc.css.scss"
         end
       end
   
@@ -58,8 +74,10 @@ module Humdrum
       def generate_graphics
         if options.graphics?
           copy_file "images/favicon.ico", "app/assets/images/favicon.ico"
-          copy_file "images/glyphicons-halflings.png", "app/assets/images/glyphicons-halflings.png"
-          copy_file "images/glyphicons-halflings-white.png", "app/assets/images/glyphicons-halflings-white.png"
+          if options.front_end_framework == "bootstrap"
+            copy_file "images/glyphicons-halflings.png", "app/assets/images/glyphicons-halflings.png"
+            copy_file "images/glyphicons-halflings-white.png", "app/assets/images/glyphicons-halflings-white.png"
+          end
         end
       end
       
@@ -71,29 +89,29 @@ module Humdrum
       end
       
       def generate_layout
-        template "views/layouts/common/_flash_message.html.erb", "app/views/layouts/common/_flash_message.html.erb"
-        template "views/layouts/common/_meta_tags.html.erb", "app/views/layouts/common/_meta_tags.html.erb"
-        template "views/layouts/common/_overlays.html.erb", "app/views/layouts/common/_overlays.html.erb"
+        template "views/#{options.front_end_framework}/layouts/common/_flash_message.html.erb", "app/views/layouts/common/_flash_message.html.erb"
+        template "views/#{options.front_end_framework}/layouts/common/_meta_tags.html.erb", "app/views/layouts/common/_meta_tags.html.erb"
+        template "views/#{options.front_end_framework}/layouts/common/_overlays.html.erb", "app/views/layouts/common/_overlays.html.erb"
     
         if options.admin_layout?
-          template "views/layouts/admin.html.erb", "app/views/layouts/admin.html.erb" 
-          template "views/layouts/admin/_header.html.erb", "app/views/layouts/admin/_header.html.erb"
-          template "views/layouts/admin/_footer.html.erb", "app/views/layouts/admin/_footer.html.erb"
-          template "views/layouts/admin/_navbar.html.erb", "app/views/layouts/admin/_navbar.html.erb"
+          template "views/#{options.front_end_framework}/layouts/admin.html.erb", "app/views/layouts/admin.html.erb" 
+          template "views/#{options.front_end_framework}/layouts/admin/_header.html.erb", "app/views/layouts/admin/_header.html.erb"
+          template "views/#{options.front_end_framework}/layouts/admin/_footer.html.erb", "app/views/layouts/admin/_footer.html.erb"
+          template "views/#{options.front_end_framework}/layouts/admin/_navbar.html.erb", "app/views/layouts/admin/_navbar.html.erb"
         end
     
         if options.public_layout?
-          template "views/layouts/public.html.erb", "app/views/layouts/public.html.erb" 
-          template "views/layouts/public/_header.html.erb", "app/views/layouts/public/_header.html.erb"
-          template "views/layouts/public/_footer.html.erb", "app/views/layouts/public/_footer.html.erb"
-          template "views/layouts/public/_navbar.html.erb", "app/views/layouts/public/_navbar.html.erb"
+          template "views/#{options.front_end_framework}/layouts/public.html.erb", "app/views/layouts/public.html.erb" 
+          template "views/#{options.front_end_framework}/layouts/public/_header.html.erb", "app/views/layouts/public/_header.html.erb"
+          template "views/#{options.front_end_framework}/layouts/public/_footer.html.erb", "app/views/layouts/public/_footer.html.erb"
+          template "views/#{options.front_end_framework}/layouts/public/_navbar.html.erb", "app/views/layouts/public/_navbar.html.erb"
         end
     
         if options.user_layout?
-          template "views/layouts/user.html.erb", "app/views/layouts/user.html.erb" 
-          template "views/layouts/user/_header.html.erb", "app/views/layouts/user/_header.html.erb"
-          template "views/layouts/user/_footer.html.erb", "app/views/layouts/user/_footer.html.erb"
-          template "views/layouts/user/_navbar.html.erb", "app/views/layouts/user/_navbar.html.erb"
+          template "views/#{options.front_end_framework}/layouts/user.html.erb", "app/views/layouts/user.html.erb" 
+          template "views/#{options.front_end_framework}/layouts/user/_header.html.erb", "app/views/layouts/user/_header.html.erb"
+          template "views/#{options.front_end_framework}/layouts/user/_footer.html.erb", "app/views/layouts/user/_footer.html.erb"
+          template "views/#{options.front_end_framework}/layouts/user/_navbar.html.erb", "app/views/layouts/user/_navbar.html.erb"
         end
     
       end
@@ -107,7 +125,7 @@ module Humdrum
       end
       
       def generate_views
-        template "views/welcome/index.html.erb", "app/views/welcome/index.html.erb" if options.public_layout?
+        template "views/#{options.front_end_framework}/welcome/index.html.erb", "app/views/welcome/index.html.erb" if options.public_layout?
       end
       
       def generate_routes
@@ -116,10 +134,6 @@ module Humdrum
       
       private
   
-      def file_name
-        layout_name.underscore
-      end
-      
       def container_class
         options.fluid? ? "container-fluid" : "container"
       end

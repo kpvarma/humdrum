@@ -1,3 +1,7 @@
+/* 
+  Ensure that you load this file in application.css after bootstrap (backword slash to escape)
+*/
+
 body {padding-top:50px;font-size:12px;}
 
 /* Gliphicons Icon Path */
