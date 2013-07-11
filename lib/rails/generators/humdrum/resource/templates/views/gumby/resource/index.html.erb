@@ -1,8 +1,12 @@
 
 <%%# Displays to Manage the items %>
 <div class="<%= row_class %> padding-top-10 margin-left-0">
-	<div class="font-size-22 pull-left">Manage <%= model_class.pluralize %></div>
-	<div id="div_<%= instance_name %>_filters pull-right">
+
+  <div class="six columns">
+    <%%= content_tag :span, "Manage <%= model_class.pluralize %>", :class=>"font-size-24 bold text-color-grey" %>
+  </div>
+
+	<div id="div_<%= instance_name %>_filters" class="six columns">
 		<%%= render :partial=>"filters" %>
 	</div>
 	<div class="cl-20"></div>

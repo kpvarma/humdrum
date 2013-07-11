@@ -16,7 +16,7 @@
 
 <%% if @<%= instances_name %>.any? %>
    <%%= content_tag :div, :class=>"pull-right" do %>
-     <%%= paginate @<%= instances_name %>, :remote => true, :theme => 'twitter-bootstrap' %>
+     <%%= paginate @<%= instances_name %>, :remote => true %>
    <%% end %>
 <%% end %>
 <div class="cl"></div>

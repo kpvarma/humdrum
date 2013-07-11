@@ -9,16 +9,15 @@
 		flash_message = flash[:success] || flash[:notice] || flash[:alert]
 	end
 	cls_name = "alert"
-	cls_name = 'alert-success' if flash.now[:success] || flash[:success]
-	cls_name = 'alert-notice' if flash.now[:notice] || flash[:notice]
-	cls_name = 'alert-error' if flash.now[:alert] || flash[:alert]
+	cls_name = 'alert success' if flash.now[:success] || flash[:success]
+	cls_name = 'alert warning' if flash.now[:notice] || flash[:notice]
+	cls_name = 'alert danger' if flash.now[:alert] || flash[:alert]
 	
 	flash_message = flash_message.strip if flash_message
 	
  %>
 <%% unless flash_message.blank? %>
-  <div class="<%%= style_classes %> alert <%%= cls_name %> fade in" data-alert="alert" style="margin-bottom:5px;">
-    <a class="close" data-dismiss='alert' href="#">×</a>
-    <p><%%= flash_message %></p>
+  <div class="<%%= style_classes %> <%%= cls_name %> fade in" data-alert="alert" style="margin-bottom:5px;">
+    <%%= flash_message %>
   </div>
 <%% end %>

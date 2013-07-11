@@ -8,8 +8,8 @@
 	
 <%% else %>
 
-	var noResultsText = "<div class='box padding-10' style='height:200px;'>No results found.</div>";
-	$('#div_<%= instance_name %>_list').html(noResultsText);
-	$('#div_<%= instance_name %>_list').html(noResultsText);
+  var noResultsText = "<div class=\"box text-color-grey padding-80 text-align-center\" style=\"height:200px;\">No <%= instances_name %> found.</div>";
+	$('#div_<%= instance_name %>_details').html(noResultsText);
+	$('#div_<%= instance_name %>_collections').html(noResultsText);
 
 <%% end %>

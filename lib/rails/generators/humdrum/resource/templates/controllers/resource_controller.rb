@@ -176,7 +176,14 @@ class <%= controller_class %> < ApplicationController
     if params[:<%= instance_name %>] && params[:<%= instance_name %>][:query]
       @query = params[:<%= instance_name %>][:query].strip
       if !@query.blank?
-        relation = relation.where("LOWER(name) LIKE LOWER('%#{@query}%') OR LOWER(description) LIKE LOWER('%#{@query}%')")
+        relation = relation.where("
+<% string_fields_including_main_field.each_with_index do |sfield, i| -%>
+<% if string_fields_including_main_field.size - 1  != i -%>
+          LOWER(<%= sfield %>) LIKE LOWER('%#{@query}%') OR\
+<% else -%>
+          LOWER(<%= sfield %>) LIKE LOWER('%#{@query}%')")
+<% end -%>
+<% end -%>
       end
     end
     

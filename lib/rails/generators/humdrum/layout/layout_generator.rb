@@ -66,8 +66,13 @@ module Humdrum
   
       def generate_javascripts
         if options.javascript?
-          copy_file "javascripts/bootstrap.js", "app/assets/javascripts/humdrum/bootstrap.js"
-          copy_file "javascripts/modernizr.2.6.2.js", "app/assets/javascripts/humdrum/modernizr.2.6.2.js"
+          template "javascripts/application.js", "app/assets/javascripts/application.js"
+          copy_file "javascripts/modernizr.2.6.2.js", "app/assets/javascripts/modernizr.2.6.2.js"
+          if options.front_end_framework == "bootstrap"
+            copy_file "javascripts/bootstrap.js", "app/assets/javascripts/bootstrap.js"
+          elsif options.front_end_framework == "gumby"
+            copy_file "javascripts/gumby.min.js", "app/assets/javascripts/gumby.min.js"
+          end
         end
       end
   
@@ -77,7 +82,10 @@ module Humdrum
           if options.front_end_framework == "bootstrap"
             copy_file "images/glyphicons-halflings.png", "app/assets/images/glyphicons-halflings.png"
             copy_file "images/glyphicons-halflings-white.png", "app/assets/images/glyphicons-halflings-white.png"
+          elsif options.front_end_framework == "gumby"
+            directory "images/fonts", "app/assets/images/fonts"
           end
+          
         end
       end
       

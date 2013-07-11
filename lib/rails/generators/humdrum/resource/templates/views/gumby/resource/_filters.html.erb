@@ -1,9 +1,18 @@
-<%%= link_to raw("<i class='icon-plus icon-white margin-right-5'></i> New Item"), <%= resource_link('new', 'path') %>, :class=>"pretty secondary btn pull-right margin-left-10", :remote=>true %>
+<div class="row">
+  <div class="eight columns">
+    <%%= form_for <%= model_class %>.new, :url => <%= resource_link('index', 'path') %>, :method => :get, :remote=>true, :html=>{:style=>"margin-bottom:0px;"} do |f| %>
+      <div class="append field">
+        <input class="wide input" type="text" placeholder="Search ..." style="width:240px;" name="<%= instance_name %>[query]">
+        <div class="pretty medium default btn icon-search">
+          <a href="#" onclick="alert('submitting...')">Search</a>
+        </div>
+      </div>
+    <%%- end %>
+  </div>
 
-<%# Used to add a search functionality %>
-<%%= form_for <%= model_class %>.new, :url => <%= resource_link('index', 'path') %>, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"margin-bottom:0px;"} do |f| %>
-	<div class="input-append">
-	  <input type="text" style="width:160px;" name="item[query]" placeholder="Search Item ...">
-	  <button type="submit" class="info btn"><i class="icon-search icon-white"></i></button>
-	</div>
-<%%- end %>
+  <div class="four columns">
+    <%%= content_tag :div, :class=>"pretty medium primary btn icon-left icon-plus pull-right" do %>
+      <%%= link_to "New Item", <%= resource_link('new', 'path') %>, :remote=>true %>
+    <%% end %>
+  </div>
+</div>

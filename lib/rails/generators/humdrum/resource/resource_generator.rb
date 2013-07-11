@@ -55,6 +55,10 @@ module Humdrum
         template "models/resource.rb", "app/models/#{model_path}.rb"
       end
       
+      def generate_javascript_validations
+        template "javascripts/validations/validator.js", "app/assets/javascripts/validations/#{model_path}.js"
+      end
+      
       def generate_migrations
         migration_template "migrations/create_resources.rb", "db/migrate/create_#{instances_name}"
       end
@@ -216,6 +220,12 @@ module Humdrum
         fields.map{|name, type| name if name != main_field && type == "string" }.uniq.compact
       end
       
+      ## List of all the string fields including main field
+      def string_fields_including_main_field
+        main_field = main_string_field
+        fields.map{|name, type| name if type == "string" }.uniq.compact
+      end
+      
       ## The main string field like 'name'
       def main_string_field
         fields.map{|name, type| name if name.include?("name") && type == "string"}.uniq.compact || fields.keys.any? ? fields.keys.first : "id"
@@ -272,6 +282,7 @@ module Humdrum
         end
       end
       
+      # This function is not used now.
       def button_class(color, size, rounded="", pretty="")
         if options.front_end_framework == "bootstrap"
           color_hash = {"blue" => "btn-primary", 

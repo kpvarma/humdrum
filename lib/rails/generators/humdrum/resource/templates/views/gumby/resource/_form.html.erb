@@ -1,44 +1,71 @@
 
 <%%# Renders a partial which is used to create a new <%= instance_name %> %>
-<%%= simple_form_for(<%= form_link_param %>, :html => {:class=>"form-vertical", :style => "margin-bottom:0px;", :method => (@<%= instance_name %>.new_record? ? :post : :put), :remote=>true}) do |f| %>
+<form id="form_<%= instance_name %>" class="margin-bottom-0" >
 
-  <%%= f.error_notification %>
   <%%= @<%= instance_name %>.errors[:base].to_sentence %>
+  
+  <%%= hidden_field_tag :faction, @<%= instance_name %>.new_record? ? <%= instances_name %>_path : <%= instance_name %>_path(@<%= instance_name %>) %>
+  <%%= hidden_field_tag :fmethod, @<%= instance_name %>.new_record? ? "POST" : "PUT" %>
 
   <div class="form-inputs">
 		
     <%- fields.each do |name, type| -%>
-    <% if type == "text" %>
-		  <%%= f.input :<%= name %>, :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;", :rows=>"8"} %>
-    <% else %>
-      <%%= f.input :<%= name %>, :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
-    <% end %>
+      <!-- Type: <%= type -%> -->
+      <% if type == "text" %>
+        <div class="row">
+          <div class="five columns">
+            <label class="pull-right margin-right-10"><%= name.titleize %></label>
+          </div>
+          <div class="seven columns">
+            <div class="field">
+              <input name="<%= name %>" class="text input" type="text" placeholder="Text input" value="<%%= @<%= instance_name %>.<%= name %> %>" />
+            </div>
+          </div>
+        </div>
+      <% elsif type == "boolean" %>
+        <div class="row margin-bottom-15">
+          <div class="five columns"></div>
+          <div class="seven columns">
+            <input name="<%= name %>" type="checkbox" id="chk_<%= name %>" <%%= @<%= instance_name %>.<%= name %> %> ? "checked='checked'" : "" >
+            <span></span> <%= name.titleize %>?
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="five columns">
+            <label class="pull-right margin-right-10"><%= name.titleize %></label>
+          </div>
+          <div class="seven columns">
+            <div class="field">
+              <input name="<%= name %>" class="text input" type="text" placeholder="Text input" value="<%%= @<%= instance_name %>.<%= name %> %>" />
+            </div>
+          </div>
+        </div>
+      <% end -%>
     <%- end -%>
-		
-    <%%#= f.input :name, :placeholder => 'Enter Item Name', :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
-
-    <%%#= f.input :age, :required => false, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
-		
-		<%%#= f.input :description, :as => :text, :placeholder => 'Add Description for the Item', :input_html => {  :rows => 6, :style => "width:95%;height:200px;  margin-bottom:5px;" } %>
-		
-		<%%#= f.input :cost, :hint => 'Enter Item Cost', :required => true, :input_html=>{:style=>"width:95%; margin-bottom:5px;"} %>
-		
-		<%%# list = ['2010 - Margaret Blue', 'Agenta Black', 'Margaret Blue', 'Crimson Yellow', 'Scarlet Red', 'Peacock Blue'] %>
-		<%%#= f.input :model, :as => :select, :collection => list, :input_html=>{:class=>"select2 prompt", :style=>"width:100%;"}, :selected => [ "Scarlet Red" ] %>
 		
   </div>
 	<div class="cl-10"></div>
 	
 	<%% button_text = "#{@<%= instance_name %>.new_record? ? "Create" : "Update"} Item" %>
    <div class="pull-right">
+   
 			<%% if @<%= instance_name %>.new_record? %>
-				<%%= link_to "Cancel", "#", :class => "pretty medium default btn", :remote=>true %>
+        <%%= content_tag :div, :class=>"pretty medium default btn icon-left icon-cancel" do %>
+				  <%%= link_to "Cancel", "#", :remote=>true %>
+        <%% end %>
 			<%% else %>
-				<%%= link_to 'Back', <%= resource_link('index', 'path') %>, :class=>"pretty medium primary btn margin-left-10", :remote => true unless @<%= instance_name %>.new_record? %>
+        <%%= content_tag :div, :class=>"pretty medium default btn icon-left icon-back" do %>
+				  <%%= link_to 'Back', <%= resource_link('index', 'path') %>, :remote => true unless @<%= instance_name %>.new_record? %>
+			  <%% end %>
 			<%% end %>
-     	<%%= f.submit button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ...", :class=>"pretty primary btn margin-left-10" %>
+      
+      <%%= content_tag :div, :class=>"pretty medium primary btn icon-left icon-plus-squared margin-left-10" do %>
+        <%%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ..." %>
+      <%% end %>
+      
    </div>
 	<div class="cl-10"></div>
 		
-<%% end %>
+</form>
 

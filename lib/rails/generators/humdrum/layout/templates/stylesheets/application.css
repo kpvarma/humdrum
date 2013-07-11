@@ -9,6 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+
+ *= require handyCSS.css
+ *= require handyCSS.box.css
+ *= require handyCSS.backdrops.css
+
 <% if options.front_end_framework == "bootstrap" -%>
  * require bootstrap-rails
  *= require bootstrap
@@ -18,8 +23,4 @@
  *= require gumby
  *= require overrides-gumby
 <% end %>
- *= require handyCSS.css
- *= require handyCSS.box.css
- *= require handyCSS.backdrops.css
-
  */
