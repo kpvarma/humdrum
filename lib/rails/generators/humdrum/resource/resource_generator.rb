@@ -34,6 +34,7 @@ module Humdrum
       def generate_views
         template "views/#{options.front_end_framework}/resource/_edit.html.erb", "app/views/#{controller_path}/_edit.html.erb"
         template "views/#{options.front_end_framework}/resource/_filters.html.erb", "app/views/#{controller_path}/_filters.html.erb"
+        template "views/#{options.front_end_framework}/resource/_field.html.erb", "app/views/#{controller_path}/_field.html.erb"
         template "views/#{options.front_end_framework}/resource/_form.html.erb", "app/views/#{controller_path}/_form.html.erb"
         template "views/#{options.front_end_framework}/resource/_index.html.erb", "app/views/#{controller_path}/_index.html.erb"
         template "views/#{options.front_end_framework}/resource/_item.html.erb", "app/views/#{controller_path}/_item.html.erb"
@@ -229,6 +230,30 @@ module Humdrum
       ## The main string field like 'name'
       def main_string_field
         fields.map{|name, type| name if name.include?("name") && type == "string"}.uniq.compact || fields.keys.any? ? fields.keys.first : "id"
+      end
+      
+      def guess_input_type(name, type)
+        if type == "string" || type == "text"
+          if name.include?("url")
+            return "url"
+          elsif name.include?("email")
+            return "email"
+          elsif name.include?("phone") || name.include?("mobile") || name.include?("landline") || name.include?("contact number") 
+            return "tel"
+          elsif name.include?("time")
+            return "time"
+          elsif name.include?("date")
+            return "date"
+          elsif name.include?("password")
+            return "password"
+          else
+            return "text"
+          end
+        elsif type == "boolean"
+          return "checkbox"
+        else
+          return "text"
+        end
       end
       
       ## Text Fields like description or summary

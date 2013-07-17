@@ -21,6 +21,7 @@
 <% elsif options.front_end_framework == "gumby" -%>
  * require gumby-rails
  *= require gumby
+ *= require gumby-pagination
  *= require overrides-gumby
 <% end %>
  */

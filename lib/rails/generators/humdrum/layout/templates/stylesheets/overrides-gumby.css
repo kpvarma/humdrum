@@ -16,3 +16,6 @@ h4 { font-size: 20px; font-size: 1.50rem}
 h5 { font-size: 16px; font-size: 1.40rem}
 h6 { font-size: 14px; font-size: 1.30rem}
 
+/* jQuery Validation error highlighting */
+div.danger label.error {color: darkred; font-size:12px;}
+

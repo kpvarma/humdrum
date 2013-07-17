@@ -56,6 +56,7 @@ module Humdrum
             
             # Copy gumby css file
             copy_file "stylesheets/gumby.css", "app/assets/stylesheets/gumby.css"
+            copy_file "stylesheets/gumby-pagination.css", "app/assets/stylesheets/gumby-pagination.css"
             
             # Its named overrides-gumby so that it loads after gumby.css
             copy_file "stylesheets/overrides-gumby.css", "app/assets/stylesheets/overrides-gumby.css"
@@ -67,6 +68,7 @@ module Humdrum
       def generate_javascripts
         if options.javascript?
           template "javascripts/application.js", "app/assets/javascripts/application.js"
+          template "javascripts/validations/main.js", "app/assets/javascripts/validations/main.js"
           copy_file "javascripts/modernizr.2.6.2.js", "app/assets/javascripts/modernizr.2.6.2.js"
           if options.front_end_framework == "bootstrap"
             copy_file "javascripts/bootstrap.js", "app/assets/javascripts/bootstrap.js"
@@ -94,6 +96,8 @@ module Humdrum
         template "helpers/navigation_helper.rb", "app/helpers/navigation_helper.rb"
         template "helpers/meta_tags_helper.rb", "app/helpers/meta_tags_helper.rb"
         template "helpers/display_helper.rb", "app/helpers/display_helper.rb"
+        template "helpers/params_parser_helper.rb", "app/helpers/params_parser_helper.rb"
+        template "helpers/flash_helper.rb", "app/helpers/flash_helper.rb"
       end
       
       def generate_layout
@@ -134,6 +138,10 @@ module Humdrum
       
       def generate_views
         template "views/#{options.front_end_framework}/welcome/index.html.erb", "app/views/welcome/index.html.erb" if options.public_layout?
+      end
+      
+      def generate_constants_config
+        template "config/config_center.rb", "config/initializers/config_center.rb"
       end
       
       def generate_routes

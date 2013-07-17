@@ -4,6 +4,8 @@ class <%= controller_class %> < ApplicationController
   layout "public"
   #authorize_actions_for Item, :actions => {:index => :delete}
   
+  before_filter :parse_pagination_params, :only=>:index
+  
   # GET /<%= instances_name %>
   # GET /<%= instances_name %>.js
   # GET /<%= instances_name %>.json

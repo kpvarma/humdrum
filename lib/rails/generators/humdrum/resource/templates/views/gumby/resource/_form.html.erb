@@ -1,6 +1,6 @@
 
 <%%# Renders a partial which is used to create a new <%= instance_name %> %>
-<form id="form_<%= instance_name %>" class="margin-bottom-0" >
+<%%= form_for(@<%= instance_name %>, :html => {:id=>"form_<%= instance_name %>", :class=>"margin-bottom-0", :method => (@<%= instance_name %>.new_record? ? :post : :put), :remote=>true}) do |f| %>
 
   <%%= @<%= instance_name %>.errors[:base].to_sentence %>
   
@@ -8,43 +8,21 @@
   <%%= hidden_field_tag :fmethod, @<%= instance_name %>.new_record? ? "POST" : "PUT" %>
 
   <div class="form-inputs">
-		
-    <%- fields.each do |name, type| %>
-      <!-- Type: <%= type -%> -->
-      <% if type == "text" %>
-      <div class="row">
-        <div class="five columns">
-          <label class="pull-right margin-right-10"><%= name.titleize %></label>
-        </div>
-        <div class="seven columns">
-          <div class="field">
-            <input name="<%= instance_name %>[<%= name %>]" class="text input" type="text" placeholder="Text input" value="<%%= @<%= instance_name %>.<%= name %> %>" />
-          </div>
-        </div>
-      </div>
-      <% elsif type == "boolean" %>
-      <div class="row margin-bottom-15">
-        <div class="five columns"></div>
-        <div class="seven columns">
-          <input name="<%= instance_name %>[<%= name %>]" type="checkbox" id="chk_<%= name %>" <%%= @<%= instance_name %>.<%= name %> %> ? "checked='checked'" : "" >
-          <span><%= name.titleize %>?</span>
-        </div>
-      </div>
-      <% else %>
-      <div class="row">
-        <div class="five columns">
-          <label class="pull-right margin-right-10"><%= name.titleize %></label>
-        </div>
-        <div class="seven columns">
-          <div class="field">
-            <input name="<%= instance_name %>[<%= name %>]" class="text input" type="text" placeholder="Text input" value="<%%= @<%= instance_name %>.<%= name %> %>" />
-          </div>
-        </div>
-      </div>
-      <% end %>
-    <%- end -%>
-		
+    
+  <%- fields.each do |name, type| %>
+    <!-- <%= name.titleize -%> (<%= type -%>) -->
+    <%%= render :partial=>"field", :locals=>{:object=>@<%= instance_name %>, 
+                                            :object_name=>'<%= instance_name %>', 
+                                            :field_name=>'<%= name %>', 
+                                            :display_name=>'<%= name.titleize %>', 
+                                            :field_type=>'<%= type %>', 
+                                            :input_type=>'<%= guess_input_type(name, type) %>', 
+                                            :required=>true, 
+                                            :place_holder=>"e.g: Put a suitable example here."} %>
+  <%- end -%>
+    
   </div>
+  
 	<div class="cl-10"></div>
 	
 	<%% button_text = "#{@<%= instance_name %>.new_record? ? "Create" : "Update"} Item" %>
@@ -67,5 +45,5 @@
    </div>
 	<div class="cl-10"></div>
 		
-</form>
+<%% end %>
 

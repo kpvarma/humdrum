@@ -10,5 +10,12 @@
 	
 	// Reload the form partial to display errors
   $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>"edit")) %>");
-
+  
+  // Validate the form
+  validate<%= model_class %>Form();
+  
+  // Populate Server Side Errors
+  errorMessages = <%%= @<%= instance_name %>.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('<%= instance_name %>', errorMessages);
+  
 <%% end %>
