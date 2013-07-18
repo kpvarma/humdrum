@@ -4,7 +4,7 @@ class Create<%= model_class.pluralize %> < ActiveRecord::Migration
     <%- fields.each do |name, type| -%>
       t.<%= type %> :<%= name %>
     <%- end -%>
-    t.timestamps
+      t.timestamps
     end
   end
 

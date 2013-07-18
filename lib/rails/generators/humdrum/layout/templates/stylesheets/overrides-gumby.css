@@ -18,4 +18,9 @@ h6 { font-size: 14px; font-size: 1.30rem}
 
 /* jQuery Validation error highlighting */
 div.danger label.error {color: darkred; font-size:12px;}
+div.danger textarea {background-color: #f0c5c5; }
+
+/* textareas should stretch maximum with default border color to match with text boxes. Also the text style should match with text input fields*/
+form textarea {width: 100%; border-color:#d8d8d8; color: #222; padding: 5px 10px; font-family: 'Open Sans'; font-weight: 300;}
+
 

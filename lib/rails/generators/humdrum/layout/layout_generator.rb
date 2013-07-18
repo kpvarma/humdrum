@@ -148,6 +148,10 @@ module Humdrum
         route("root :to => 'welcome#index'")
       end
       
+      def generate_locales
+        template "config/locales/humdrum.en.yml", "config/locales/humdrum.en.yml"
+      end
+      
       private
   
       def container_class

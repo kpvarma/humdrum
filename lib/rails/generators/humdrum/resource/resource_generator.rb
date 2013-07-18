@@ -61,7 +61,14 @@ module Humdrum
       end
       
       def generate_migrations
-        migration_template "migrations/create_resources.rb", "db/migrate/create_#{instances_name}"
+        migration_dir = "db/migrate"
+        migration_file_name = "create_#{instances_name}.rb"
+        destination = self.class.migration_exists?(migration_dir, migration_file_name)
+        if destination
+          say_status("skipped", "Migration #{migration_file_name}.rb already exists")
+        else
+          migration_template "migrations/create_resources.rb", "db/migrate/create_#{instances_name}.rb"
+        end
       end
       
       def generate_routes
@@ -70,10 +77,6 @@ module Humdrum
         route words.reverse.inject("resources :#{resource.pluralize}") { |acc, phrase|
           "namespace(:#{phrase}){ #{acc} }"
         }
-      end
-      
-      def generate_locales
-        template "config/locales/humdrum.en.yml", "config/locales/humdrum.en.yml"
       end
       
       private
@@ -153,6 +156,14 @@ module Humdrum
         instance_name.pluralize
       end
       
+      def instance_title
+        instance_name.titleize
+      end
+      
+      def instances_title
+        instances_name.titleize
+      end
+      
       def table_name
         instances_name
       end
@@ -188,33 +199,6 @@ module Humdrum
         end
       end
       
-      def input_type(name, type)
-        if name.include?("email") && type == "string"
-          return "email"
-        elsif name.include?("password") && type == "string"
-          return "password"
-        elsif (name.include?("phone") || name.include?("mobile")) && type == "string"
-          return "tel"
-        else
-          case type
-          when "string"
-            "text"
-          when "text"
-            "textarea"
-          when "integer"
-            "number"
-          when "references"
-            "type"
-          when "date"
-            "date"
-          when "datetime"
-            "datetime-local"
-          when "timestamp", "time"
-            "time"
-          end
-        end
-      end
-      
       ## List of all the string fields 
       def string_fields
         main_field = main_string_field
@@ -233,7 +217,8 @@ module Humdrum
       end
       
       def guess_input_type(name, type)
-        if type == "string" || type == "text"
+        case type
+        when "string"
           if name.include?("url")
             return "url"
           elsif name.include?("email")
@@ -247,12 +232,24 @@ module Humdrum
           elsif name.include?("password")
             return "password"
           else
-            return "text"
+            "text"
           end
-        elsif type == "boolean"
-          return "checkbox"
+        when "text"
+          "textarea"
+        when "integer"
+          "number"
+        when "references"
+          "type"
+        when "date"
+          "date"
+        when "datetime"
+          "datetime-local"
+        when "timestamp", "time"
+          "time"
+        when "boolean"
+          "checkbox"
         else
-          return "text"
+          "text"
         end
       end
       
