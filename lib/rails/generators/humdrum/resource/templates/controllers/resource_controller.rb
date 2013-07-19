@@ -28,7 +28,7 @@ class <%= controller_class %> < ApplicationController
     @<%= instance_name %> = <%= model_class %>.find(params[:id])
     
     respond_to do |format|
-      format.html { get_collections and render :action => :index }
+      format.html { get_collections and render :index }
       format.json { render json: @<%= instance_name %> }
       format.js {}
     end
@@ -41,7 +41,7 @@ class <%= controller_class %> < ApplicationController
     @<%= instance_name %> = <%= model_class %>.new
     
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { get_collections and render :index }
       format.json { render json: @<%= instance_name %> }
       format.js {}
     end
@@ -51,6 +51,12 @@ class <%= controller_class %> < ApplicationController
   def edit
     ## Fetching the <%= instance_name %> object 
     @<%= instance_name %> = <%= model_class %>.find(params[:id])
+    
+    respond_to do |format|
+      format.html { get_collections and render :index }
+      format.json { render json: @<%= instance_name %> }
+      format.js {}
+    end
   end
 
   # POST /<%= instances_name %>

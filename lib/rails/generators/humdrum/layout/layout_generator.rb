@@ -36,10 +36,6 @@ module Humdrum
       #  config = YAML::load File.open(args[:file], 'r')
       #end
   
-      def remove_index_file
-        remove_file "public/index.html"
-      end
-      
       def generate_stylesheets
         if options.stylesheet?
           
@@ -140,16 +136,8 @@ module Humdrum
         template "views/#{options.front_end_framework}/welcome/index.html.erb", "app/views/welcome/index.html.erb" if options.public_layout?
       end
       
-      def generate_constants_config
-        template "config/config_center.rb", "config/initializers/config_center.rb"
-      end
-      
       def generate_routes
         route("root :to => 'welcome#index'")
-      end
-      
-      def generate_locales
-        template "config/locales/humdrum.en.yml", "config/locales/humdrum.en.yml"
       end
       
       private

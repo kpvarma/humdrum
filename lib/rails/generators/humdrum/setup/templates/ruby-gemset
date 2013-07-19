@@ -1,1 +1,1 @@
-<%= options.ruby-gemset %>
+<%= ruby_gemset %>

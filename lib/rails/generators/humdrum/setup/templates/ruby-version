@@ -1,1 +1,1 @@
-<%= options.ruby-version %>
+<%= ruby_version %>
