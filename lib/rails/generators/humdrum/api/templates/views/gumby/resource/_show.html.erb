@@ -39,9 +39,19 @@
   <div class="cl-20"></div>
   
   <div class="palette-footer margin-left-10">
-    <%%= display_time(@<%= instance_name %>.created_at, "pull-left text-color-grey") %>
-    <%%= link_to raw("<i class=\"icon-pencil icon-white margin-right-5\"></i> Edit"), <%= resource_link('edit', 'path') %>(@<%= instance_name %>), :class=>"btn btn-inverse btn-mini pull-right margin-left-10", :remote=>true %>
-    <%%= link_to raw("<i class=\"icon-remove \"></i> Delete"), <%= resource_link('destroy', 'path') %>(@<%= instance_name %>), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-mini pull-right", :remote=>true %>
+  
+    <div class="pull-left text-color-red font-size-12">
+      <%%= display_time(@<%= instance_name %>.created_at) %>
+    </div>
+    
+    <%%= content_tag :div, :class=>"pretty small danger btn icon-left icon-trash margin-left-10 pull-right" do %>
+      <%%= link_to "Delete", <%= resource_link('destroy', 'path') %>(@<%= instance_name %>), method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %>
+    <%% end %>
+    
+    <%%= content_tag :div, :class=>"pretty small medium primary btn icon-left icon-pencil margin-left-10 pull-right" do %>
+      <%%= link_to "Edit", <%= resource_link('edit', 'path') %>(@<%= instance_name %>), :remote=>true %>
+    <%% end %>
+    
     <div class="cl-10"></div>
   </div>
 

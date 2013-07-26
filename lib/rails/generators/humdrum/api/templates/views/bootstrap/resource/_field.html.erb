@@ -1,0 +1,41 @@
+<%% 
+  unless defined?(required)
+    required = false
+  end
+  unless defined?(place_holder)
+    place_holder = ""
+  end
+  inp_id = "inp_#{display_name.underscore.split(" ").join("_")}"
+%>
+<%%
+  label_class, field_class = object.errors[field_name.to_s].any? ? ["text-color-red", "error"] : ["", ""]
+%>
+<div class="row">
+  <%% if ["text", "email", "search", "password", "date", "time", "tel", "url", "month", "file", "image", ""].include?(input_type) %>
+    <div class="span5">
+      <span class="text-color-red pull-right margin-left-10 margin-right-5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
+      <label class="pull-right <%%= label_class %>" for="<%%= inp_id %>" ><%%= display_name %></label>
+    </div>
+    <div class="span7">
+      <div class="field <%%= field_class %>">
+        <input name="<%%= object_name %>[<%%= field_name %>]" id="inp_<%%= display_name.underscore.split(" ").join("_") %>" class="text input" type="<%%= input_type %>" placeholder="<%%= place_holder %>" value="<%%= object.send(field_name.to_s) %>" />
+      </div>
+    </div>
+  <%% elsif input_type == "checkbox" %>
+    <div class="span5">
+      <span class="text-color-red pull-right margin-left-10 margin-right-5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
+      <label class="pull-right <%%= label_class %>" for="<%%= inp_id %>" ><%%= display_name %></label>
+    </div>
+    <div class="span7 margin-bottom-10">
+      <input name="<%%= object_name %>[<%%= field_name %>]" id="inp_<%%= display_name.underscore.split(" ").join("_") %>" type="<%%= input_type %>" class="checkbox input pull-left margin-5" <%%= object.send(field_name.to_s) ? "checked='checked'" : "" %> />
+    </div>
+  <%% elsif input_type == "textarea" %>
+    <div class="span5">
+      <span class="text-color-red pull-right margin-left-10 margin-right-5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
+      <label class="pull-right <%%= label_class %>" for="<%%= inp_id %>" ><%%= display_name %></label>
+    </div>
+    <div class="span7 margin-bottom-10">
+      <textarea name="<%%= object_name %>[<%%= field_name %>]" id="inp_<%%= display_name.underscore.split(" ").join("_") %> placeholder="<%%= place_holder %>" "><%%= object.send(field_name.to_s) %></textarea>
+    </div>
+  <%% end %>
+</div>

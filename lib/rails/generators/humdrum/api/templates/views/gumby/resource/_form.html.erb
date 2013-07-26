@@ -1,0 +1,49 @@
+
+<%%# Renders a partial which is used to create a new <%= instance_name %> %>
+<%%= form_for(@<%= instance_name %>, :html => {:id=>"form_<%= instance_name %>", :class=>"margin-bottom-0", :method => (@<%= instance_name %>.new_record? ? :post : :put), :remote=>true}) do |f| %>
+
+  <%%= @<%= instance_name %>.errors[:base].to_sentence %>
+  
+  <%%= hidden_field_tag :faction, @<%= instance_name %>.new_record? ? <%= instances_name %>_path : <%= instance_name %>_path(@<%= instance_name %>) %>
+  <%%= hidden_field_tag :fmethod, @<%= instance_name %>.new_record? ? "POST" : "PUT" %>
+
+  <div class="form-inputs">
+    
+  <%- fields.each do |name, type| %>
+    <!-- <%= name.titleize -%> (<%= type -%>) -->
+    <%%= render :partial=>"field", :locals=>{:object=>@<%= instance_name %>, 
+                                            :object_name=>'<%= instance_name %>', 
+                                            :field_name=>'<%= name %>', 
+                                            :display_name=>'<%= name.titleize %>', 
+                                            :field_type=>'<%= type %>', 
+                                            :input_type=>'<%= guess_input_type(name, type) %>', 
+                                            :required=>true, 
+                                            :place_holder=>"e.g: Put a suitable example here."} %>
+  <%- end -%>
+    
+  </div>
+  
+	<div class="cl-10"></div>
+	
+	<%% button_text = "#{@<%= instance_name %>.new_record? ? "Create" : "Update"} Item" %>
+   <div class="pull-right">
+   
+			<%% if @<%= instance_name %>.new_record? %>
+        <%%= content_tag :div, :class=>"pretty medium default btn icon-left icon-cancel" do %>
+				  <%%= link_to "Cancel", "#", :remote=>true %>
+        <%% end %>
+			<%% else %>
+        <%%= content_tag :div, :class=>"pretty medium default btn icon-left icon-back" do %>
+				  <%%= link_to 'Back', <%= resource_link('index', 'path') %>, :remote => true unless @<%= instance_name %>.new_record? %>
+			  <%% end %>
+			<%% end %>
+      
+      <%%= content_tag :div, :class=>"pretty medium primary btn icon-left icon-plus-squared margin-left-10" do %>
+        <%%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ..." %>
+      <%% end %>
+      
+   </div>
+	<div class="cl-10"></div>
+		
+<%% end %>
+

@@ -1,0 +1,33 @@
+
+<%%# Displays to Manage the items %>
+<div class="<%= row_class %> padding-top-10 margin-left-0">
+	<div class="font-size-22 pull-left">Manage <%= model_class.pluralize %></div>
+	<div id="div_<%= instance_name %>_filters pull-right">
+		<%%= render :partial=>"filters" %>
+	</div>
+	<div class="cl-20"></div>
+</div>
+<%%# Renders a partial to display all the <%= instances_name %> %>
+<div class="<%= row_class %>">
+	<div id="div_<%= instance_name %>_index" class="span6">
+		<%%= render :partial=>"index" %>
+	</div>
+
+	<div id="div_<%= instance_name %>_details" class="span6">
+		<%% case	params[:action] %>
+		<%% when "new", "edit", "show" %>
+			<%%= render :partial=>params[:action] %>
+		<%% when "index" %>	
+			<%% if @<%= instances_name %>.empty? %>
+				<%%= render :partial=>"summary" %>
+			<%% else %>
+				<%%= render :partial=>"show" %>	
+			<%% end %>
+		<%% else %>
+			<%%= render :partial=>"summary" %>	
+		<%% end %>
+	</div>
+	
+</div>
+
+

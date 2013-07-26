@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="eight columns">
+    <%%= form_for <%= model_class %>.new, :url => <%= resource_link('index', 'path') %>, :method => :get, :remote=>true, :html=>{:style=>"margin-bottom:0px;"} do |f| %>
+      <div class="append field">
+        <input class="wide input" type="text" placeholder="Search ..." style="width:240px;" name="<%= instance_name %>[query]">
+        <div class="pretty medium default btn icon-search">
+          <a href="#" onclick="alert('submitting...')">Search</a>
+        </div>
+      </div>
+    <%%- end %>
+  </div>
+
+  <div class="four columns">
+    <%%= content_tag :div, :class=>"pretty medium primary btn icon-left icon-plus pull-right" do %>
+      <%%= link_to "New Item", <%= resource_link('new', 'path') %>, :remote=>true %>
+    <%% end %>
+  </div>
+</div>

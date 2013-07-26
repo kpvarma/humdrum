@@ -2,7 +2,7 @@
   Ensure that you load this file in application.css after bootstrap (backword slash to escape)
 */
 
-body {padding-top:50px;font-size:14px;}
+body {font-size:14px;}
 
 /* Gliphicons Icon Path */
 

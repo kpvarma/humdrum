@@ -1,0 +1,9 @@
+<%%= link_to 'New <%= model_class %>', <%= resource_link('new', 'path') %>, :class=>"btn btn-mini btn-primary pull-right margin-left-10", :remote=>true %>
+
+<%%# Used to add a search functionality %>
+<%%= form_for <%= model_class %>.new, :url => <%= resource_link('index', 'path') %>, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"margin-bottom:0px;"} do |f| %>
+	<div class="input-append">
+	  <input type="text" style="height:13px;width:120px;" name="<%= instance_name %>[query]">
+	  <button type="submit" class="btn btn-mini btn-primary"><i class="icon-search icon-white margin-right-5"></i>Search Item ...</button>
+	</div>
+<%%- end %>

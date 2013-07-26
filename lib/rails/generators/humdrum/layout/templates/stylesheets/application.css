@@ -17,6 +17,7 @@
 <% if options.front_end_framework == "bootstrap" -%>
  * require bootstrap-rails
  *= require bootstrap
+ *= require bootstrap-responsive
  *= require overrides-bootstrap
 <% elsif options.front_end_framework == "gumby" -%>
  * require gumby-rails

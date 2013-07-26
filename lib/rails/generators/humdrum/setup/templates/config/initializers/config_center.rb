@@ -15,17 +15,25 @@ module ConfigCenter
     # No spaces, hyphen or any other special characters are allowed 
     USERNAME_FORMAT_REG_EXP = /^[a-zA-Z0-9\.\_+]*$/i
     
-    # First Name
+    # Generic Name
     # a to z (both upper and lower case), 1 to 9, space and curly brackets "(" & ")" allowed.
-    FIRST_NAME_MIN_LEN = 10
-    FIRST_NAME_MAX_LEN = 56
-    FIRST_NAME_FORMAT_REG_EXP = /^[a-zA-Z1-9\-\ \(\)+]*$/i
+    NAME_MIN_LEN = 10
+    NAME_MAX_LEN = 56
+    NAME_FORMAT_REG_EXP = /^[a-zA-Z1-9\-\ \(\)+]*$/i
     
-    # Last Name
+    # User Name
     # a to z (both upper and lower case), 1 to 9, space and curly brackets "(" & ")" allowed.
-    LAST_NAME_MIN_LEN = 10
-    LAST_NAME_MAX_LEN = 56
-    LAST_NAME_FORMAT_REG_EXP = /^[a-zA-Z1-9\-\ \(\)+]*$/i
+    USERNAME_MIN_LEN = 6
+    USERNAME_MAX_LEN = 32
+    USERNAME_FORMAT_REG_EXP = /^[a-zA-Z0-9\.\_+]*$/i
+    
+    # Password
+    # should have atleast 1 Character (a to z (both upper and lower case))
+    # and 1 Number (1 to 9)
+    # and 1 Special Character from (!,@,$,&,*,_)",
+    PASSWORD_MIN_LEN = 8
+    PASSWORD_MAX_LEN = 128
+    PASSWORD_FORMAT_REG_EXP = /^(?=.*?[a-z][A-Z])(?=.*?\d)(?=.*?[!@$&*_])/i
     
   end
   
