@@ -6,8 +6,8 @@ module Humdrum
       
       desc "Generates a database.example.yml file depending upon the database passed (first argument). Usage: rails g humdrum:database postgresql"
       
-      class_option :ruby_version, :type => :string, :default => "ruby-1.9.3-p429", :desc => "Ruby Version to create .ruby-version file"
-      class_option :ruby_gemset, :type => :string, :default => "app", :desc => "Name of the gemset"
+      class_option :ruby_version, :type => :string, :default => "1.9.3-p429", :desc => "Ruby Version to create .ruby-version file"
+      class_option :rbenv_gemsets, :type => :string, :default => "app", :desc => "Name of the gemset. this file is used by rbenv"
       
       class_option :config_database, :type => :boolean, :default => true, :desc => "Pass false if you want to generate database.yml again."
       
@@ -46,9 +46,9 @@ module Humdrum
         end
       end
       
-      def set_ruby_gemset
+      def set_rbenv_gemsets
         unless options.skip_gemset
-          template "ruby-gemset", ".ruby-gemset"
+          template "rbenv-gemsets", ".rbenv-gemsets"
         end
       end
       
@@ -81,8 +81,8 @@ module Humdrum
         options.ruby_version
       end
       
-      def ruby_gemset
-        options.ruby_gemset
+      def rbenv_gemsets
+        options.rbenv_gemsets
       end
   
     end
