@@ -1,0 +1,71 @@
+
+<%%# Renders a partial which is used to create a new <%= instance_name %> %>
+<form id="form_<%= instance_name %>" class="margin-bottom-0" >
+
+  <%%= @<%= instance_name %>.errors[:base].to_sentence %>
+  
+  <%%= hidden_field_tag :faction, @<%= instance_name %>.new_record? ? <%= instances_name %>_path : <%= instance_name %>_path(@<%= instance_name %>) %>
+  <%%= hidden_field_tag :fmethod, @<%= instance_name %>.new_record? ? "POST" : "PUT" %>
+
+  <div class="form-inputs">
+		
+    <%- fields.each do |name, type| %>
+      <!-- Type: <%= type -%> -->
+      <% if type == "text" %>
+      <div class="row">
+        <div class="five columns">
+          <label class="pull-right margin-right-10"><%= name.titleize %></label>
+        </div>
+        <div class="seven columns">
+          <div class="field">
+            <input name="<%= instance_name %>[<%= name %>]" class="text input" type="text" placeholder="Text input" value="<%%= @<%= instance_name %>.<%= name %> %>" />
+          </div>
+        </div>
+      </div>
+      <% elsif type == "boolean" %>
+      <div class="row margin-bottom-15">
+        <div class="five columns"></div>
+        <div class="seven columns">
+          <input name="<%= instance_name %>[<%= name %>]" type="checkbox" id="chk_<%= name %>" <%%= @<%= instance_name %>.<%= name %> %> ? "checked='checked'" : "" >
+          <span><%= name.titleize %>?</span>
+        </div>
+      </div>
+      <% else %>
+      <div class="row">
+        <div class="five columns">
+          <label class="pull-right margin-right-10"><%= name.titleize %></label>
+        </div>
+        <div class="seven columns">
+          <div class="field">
+            <input name="<%= instance_name %>[<%= name %>]" class="text input" type="text" placeholder="Text input" value="<%%= @<%= instance_name %>.<%= name %> %>" />
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <%- end -%>
+		
+  </div>
+	<div class="cl-10"></div>
+	
+	<%% button_text = "#{@<%= instance_name %>.new_record? ? "Create" : "Update"} Item" %>
+   <div class="pull-right">
+   
+			<%% if @<%= instance_name %>.new_record? %>
+        <%%= content_tag :div, :class=>"pretty medium default btn icon-left icon-cancel" do %>
+				  <%%= link_to "Cancel", "#", :remote=>true %>
+        <%% end %>
+			<%% else %>
+        <%%= content_tag :div, :class=>"pretty medium default btn icon-left icon-back" do %>
+				  <%%= link_to 'Back', <%= resource_link('index', 'path') %>, :remote => true unless @<%= instance_name %>.new_record? %>
+			  <%% end %>
+			<%% end %>
+      
+      <%%= content_tag :div, :class=>"pretty medium primary btn icon-left icon-plus-squared margin-left-10" do %>
+        <%%= submit_tag button_text, "data-reset-text"=>button_text, "data-loading-text"=>"Saving ..." %>
+      <%% end %>
+      
+   </div>
+	<div class="cl-10"></div>
+		
+</form>
+

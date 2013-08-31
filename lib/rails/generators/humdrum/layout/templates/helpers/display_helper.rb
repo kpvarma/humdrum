@@ -28,14 +28,15 @@ module DisplayHelper
   end
   
   def display_time(disp_time, class_name = nil)
-    return_str = ""
-    if ((Time.now - disp_time) < (6*24*60*60))
-      return_str = distance_of_time_in_words_to_now(disp_time) + " ago"
-    else
-      return_str = "#{disp_time.to_s(:hours)}:#{disp_time.to_s(:mins)}#{disp_time.to_s(:ampm).downcase} on #{disp_time.strftime('%m/%d/%y')}"
-    end
-
-    return content_tag("span", return_str, :class => (class_name.nil? ? "text-color-grey" : class_name))
+    return distance_of_time_in_words_to_now(disp_time) + " ago"
+    # return_str = ""
+    # if ((Time.now - disp_time) < (6*24*60*60))
+    #   return_str = distance_of_time_in_words_to_now(disp_time) + " ago"
+    # else
+    #   return_str = "#{disp_time.strftime('%m/%d/%y')}"
+    # end
+    # 
+    # return content_tag("span", return_str, :class => (class_name.nil? ? "text-color-grey" : class_name))
   end
   
 end

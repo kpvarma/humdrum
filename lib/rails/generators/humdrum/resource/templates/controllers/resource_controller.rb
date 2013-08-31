@@ -1,10 +1,8 @@
 class <%= controller_class %> < ApplicationController
   
-  #before_filter :require_user, :set_navs, :parse_filters_from_url
-  layout "public"
+  #before_filter :require_user
   #authorize_actions_for Item, :actions => {:index => :delete}
-  
-  before_filter :parse_pagination_params, :only=>:index
+  before_filter :set_navs, :parse_pagination_params, :only=>:index
   
   # GET /<%= instances_name %>
   # GET /<%= instances_name %>.js
@@ -105,7 +103,7 @@ class <%= controller_class %> < ApplicationController
     @<%= instance_name %> = <%= model_class %>.find(params[:id])
     
     ## Updating the @<%= instance_name %> object with params
-    @<%= instance_name %>.update_attributes(params[:<%= instance_name %>])
+    @<%= instance_name %>.assign_attributes(params[:<%= instance_name %>])
     
     ## Validating the data
     @<%= instance_name %>.valid?
@@ -181,8 +179,8 @@ class <%= controller_class %> < ApplicationController
     relation = <%= model_class %>.where("")
     @filters = {}
     
-    if params[:<%= instance_name %>] && params[:<%= instance_name %>][:query]
-      @query = params[:<%= instance_name %>][:query].strip
+    if params[:query]
+      @query = params[:query].strip
       if !@query.blank?
         relation = relation.where("
 <% string_fields_including_main_field.each_with_index do |sfield, i| -%>

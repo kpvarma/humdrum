@@ -46,7 +46,7 @@
 
   <%%= @<%= instance_name %>.errors[:base].to_sentence %>
   
-  <%%= hidden_field_tag :faction, @<%= instance_name %>.new_record? ? <%= instances_name %>_path : <%= instance_name %>_path(@<%= instance_name %>) %>
+  <%%= hidden_field_tag :faction, @<%= instance_name %>.new_record? ? <%= resource_link('show', 'path') %> : <%= <%= resource_link('show', 'path') %>(@<%= instance_name %>) %>
   <%%= hidden_field_tag :fmethod, @<%= instance_name %>.new_record? ? "POST" : "PUT" %>
 
   <div class="form-inputs">

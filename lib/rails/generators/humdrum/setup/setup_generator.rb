@@ -34,6 +34,10 @@ module Humdrum
         template "config/locales/humdrum.en.yml", "config/locales/humdrum.en.yml"
       end
       
+      def generate_core_ext
+        template "lib/core_ext/string.rb", "lib/core_ext/string.rb"
+      end
+      
       def set_gitignore
         unless options.skip_gitignore
           template "gitignore", ".gitignore"

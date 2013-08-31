@@ -11,16 +11,21 @@
  *= require_self
 
  *= require handyCSS.css
- *= require handyCSS.box.css
- *= require handyCSS.backdrops.css
+ * require handyCSS.box.css
+ * require handyCSS.backdrops.css
 
-<% if options.front_end_framework == "bootstrap" -%>
- * require bootstrap-rails
+<% case framework 
+   when "bootstrap3" -%>
+ * require bootstrap-rails (Alternatively you can use the bootstrap3-rails gem)
+ *= require bootstrap
+ *= require overrides-bootstrap
+<% when "bootstrap2" -%>
+ * require bootstrap-rails (Alternatively you can use the bootstrap-rails gem)
  *= require bootstrap
  *= require bootstrap-responsive
  *= require overrides-bootstrap
-<% elsif options.front_end_framework == "gumby" -%>
- * require gumby-rails
+<% when "gumby" -%>
+ * require gumby-rails (Alternatively you can use the gumby-rails gem)
  *= require gumby
  *= require gumby-pagination
  *= require overrides-gumby

@@ -3,5 +3,6 @@ class ApplicationController < ActionController::Base
   
   include ParamsParserHelper
   include FlashHelper
+  include NavigationHelper
   
 end

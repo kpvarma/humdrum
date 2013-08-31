@@ -11,18 +11,16 @@ module ConfigCenter
     # xxx-xxx-xxxx format
     PHONE_FORMAT_REG_EXP = /^([0-9\(\)\/\+ \-]){3}-([0-9\(\)\/\+ \-]){3}-([0-9\(\)\/\+ \-]){4}$/i
     
-    # Only characters (both upper and lowercase), numbers, dot(.), underscore (_)
-    # No spaces, hyphen or any other special characters are allowed 
-    USERNAME_FORMAT_REG_EXP = /^[a-zA-Z0-9\.\_+]*$/i
-    
     # Generic Name
     # a to z (both upper and lower case), 1 to 9, space and curly brackets "(" & ")" allowed.
-    NAME_MIN_LEN = 10
+    NAME_MIN_LEN = 2
     NAME_MAX_LEN = 56
     NAME_FORMAT_REG_EXP = /^[a-zA-Z1-9\-\ \(\)+]*$/i
-    
+
     # User Name
-    # a to z (both upper and lower case), 1 to 9, space and curly brackets "(" & ")" allowed.
+    # Minimum length is 6 by default and maximum length is 32 by default
+    # Only characters (both upper and lowercase), numbers, dot(.), underscore (_)
+    # No spaces, hyphen or any other special characters are allowed 
     USERNAME_MIN_LEN = 6
     USERNAME_MAX_LEN = 32
     USERNAME_FORMAT_REG_EXP = /^[a-zA-Z0-9\.\_+]*$/i
@@ -68,4 +66,5 @@ module ConfigCenter
       end
     end
   end
+
 end

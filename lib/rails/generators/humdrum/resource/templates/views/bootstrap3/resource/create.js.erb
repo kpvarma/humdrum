@@ -1,0 +1,22 @@
+<%% if @<%= instance_name %>.errors.blank? %>
+	
+	// Fill the right box with first <%= instance_name %> details
+	$('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>'show')) %>");
+	
+	// Add the newly created item to the list
+  $("#div_<%= instance_name %>_collections").prepend("<div id=\"div_<%= instance_name %>_<%%= @<%= instance_name %>.id %>\"><%%= escape_javascript(render(:partial => 'item', :locals => { :<%= instance_name %> => @<%= instance_name %> })) %></div>")
+  $("#div_<%= instance_name %>_empty").hide();
+
+<%% else %>
+	
+	// Reload the form partial to display errors
+  $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>'new')) %>");
+  
+  // Validate the form
+  validate<%= model_class %>Form();
+  
+  // Populate Server Side Errors
+  errorMessages = <%%= @<%= instance_name %>.errors.full_messages.to_json.html_safe %>;
+  populateServerSideErrors('<%= instance_name %>', errorMessages);
+	
+<%% end %>

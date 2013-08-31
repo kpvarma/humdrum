@@ -3,7 +3,8 @@ require 'rails/generators/migration'
 
 module Humdrum
   module Generators
-    class ResourceGenerator < Rails::Generators::Base
+    module Api
+      class SessionGenerator < Rails::Generators::Base
       
       include Rails::Generators::Migration
       
@@ -32,24 +33,24 @@ module Humdrum
       end
       
       def generate_views
-        template "views/#{options.front_end_framework}/resource/_edit.html.erb", "app/views/#{controller_path}/_edit.html.erb"
-        template "views/#{options.front_end_framework}/resource/_filters.html.erb", "app/views/#{controller_path}/_filters.html.erb"
-        template "views/#{options.front_end_framework}/resource/_field.html.erb", "app/views/#{controller_path}/_field.html.erb"
-        template "views/#{options.front_end_framework}/resource/_form.html.erb", "app/views/#{controller_path}/_form.html.erb"
-        template "views/#{options.front_end_framework}/resource/_index.html.erb", "app/views/#{controller_path}/_index.html.erb"
-        template "views/#{options.front_end_framework}/resource/_item.html.erb", "app/views/#{controller_path}/_item.html.erb"
-        template "views/#{options.front_end_framework}/resource/_nav_filters.html.erb", "app/views/#{controller_path}/_nav_filters.html.erb"
-        template "views/#{options.front_end_framework}/resource/_new.html.erb", "app/views/#{controller_path}/_new.html.erb"
-        template "views/#{options.front_end_framework}/resource/_show.html.erb", "app/views/#{controller_path}/_show.html.erb"
-        template "views/#{options.front_end_framework}/resource/_summary.html.erb", "app/views/#{controller_path}/_summary.html.erb"
-        template "views/#{options.front_end_framework}/resource/create.js.erb", "app/views/#{controller_path}/create.js.erb"
-        template "views/#{options.front_end_framework}/resource/destroy.js.erb", "app/views/#{controller_path}/destroy.js.erb"
-        template "views/#{options.front_end_framework}/resource/edit.js.erb", "app/views/#{controller_path}/edit.js.erb"
-        template "views/#{options.front_end_framework}/resource/index.js.erb", "app/views/#{controller_path}/index.js.erb"
-        template "views/#{options.front_end_framework}/resource/new.js.erb", "app/views/#{controller_path}/new.js.erb"
-        template "views/#{options.front_end_framework}/resource/show.js.erb", "app/views/#{controller_path}/show.js.erb"
-        template "views/#{options.front_end_framework}/resource/update.js.erb", "app/views/#{controller_path}/update.js.erb"
-        template "views/#{options.front_end_framework}/resource/index.html.erb", "app/views/#{controller_path}/index.html.erb"
+        template "views/#{framework}/resource/_edit.html.erb", "app/views/#{controller_path}/_edit.html.erb"
+        template "views/#{framework}/resource/_filters.html.erb", "app/views/#{controller_path}/_filters.html.erb"
+        template "views/#{framework}/resource/_field.html.erb", "app/views/#{controller_path}/_field.html.erb"
+        template "views/#{framework}/resource/_form.html.erb", "app/views/#{controller_path}/_form.html.erb"
+        template "views/#{framework}/resource/_index.html.erb", "app/views/#{controller_path}/_index.html.erb"
+        template "views/#{framework}/resource/_item.html.erb", "app/views/#{controller_path}/_item.html.erb"
+        template "views/#{framework}/resource/_nav_filters.html.erb", "app/views/#{controller_path}/_nav_filters.html.erb"
+        template "views/#{framework}/resource/_new.html.erb", "app/views/#{controller_path}/_new.html.erb"
+        template "views/#{framework}/resource/_show.html.erb", "app/views/#{controller_path}/_show.html.erb"
+        template "views/#{framework}/resource/_summary.html.erb", "app/views/#{controller_path}/_summary.html.erb"
+        template "views/#{framework}/resource/create.js.erb", "app/views/#{controller_path}/create.js.erb"
+        template "views/#{framework}/resource/destroy.js.erb", "app/views/#{controller_path}/destroy.js.erb"
+        template "views/#{framework}/resource/edit.js.erb", "app/views/#{controller_path}/edit.js.erb"
+        template "views/#{framework}/resource/index.js.erb", "app/views/#{controller_path}/index.js.erb"
+        template "views/#{framework}/resource/new.js.erb", "app/views/#{controller_path}/new.js.erb"
+        template "views/#{framework}/resource/show.js.erb", "app/views/#{controller_path}/show.js.erb"
+        template "views/#{framework}/resource/update.js.erb", "app/views/#{controller_path}/update.js.erb"
+        template "views/#{framework}/resource/index.html.erb", "app/views/#{controller_path}/index.html.erb"
       end
       
       def generate_models
@@ -334,6 +335,7 @@ module Humdrum
         "#{pretty.blank? ? "" : "#{pretty} "}#{rounded.blank? ? "" : "#{rounded} "}#{size_hash[size]} #{color_hash[color]} btn"
       end
       
+    end
     end
   end
 end
