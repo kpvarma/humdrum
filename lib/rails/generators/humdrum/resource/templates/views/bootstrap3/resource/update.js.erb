@@ -5,6 +5,9 @@
 	
 	// Refresh the updated item in the list
   $("#div_<%= instance_name %>_<%%= @<%= instance_name %>.id %>").html("<%%= escape_javascript(render :partial => 'item', :locals => { :<%= instance_name %> => @<%= instance_name %> }) %>")
+  
+  // Close Modal
+  closeModal();
 
 <%% else %>
 	

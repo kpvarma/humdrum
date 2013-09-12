@@ -6,6 +6,9 @@
 	// Add the newly created item to the list
   $("#div_<%= instance_name %>_collections").prepend("<div id=\"div_<%= instance_name %>_<%%= @<%= instance_name %>.id %>\"><%%= escape_javascript(render(:partial => 'item', :locals => { :<%= instance_name %> => @<%= instance_name %> })) %></div>")
   $("#div_<%= instance_name %>_empty").hide();
+  
+  // Close Modal
+  closeModal();
 
 <%% else %>
 	
