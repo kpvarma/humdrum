@@ -1,7 +1,5 @@
-body {
-padding: 30px;
-}
+body { padding: 30px; }
 
-.navbar {
-margin-bottom: 30px;
-}
+.navbar { margin-bottom: 0px; }
+
+.alert { padding:10px; }

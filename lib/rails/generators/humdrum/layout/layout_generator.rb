@@ -112,6 +112,7 @@ module Humdrum
       end
       
       def generate_helpers
+        template "helpers/image_helper.rb", "app/helpers/image_helper.rb"
         template "helpers/title_helper.rb", "app/helpers/title_helper.rb"
         template "helpers/navigation_helper.rb", "app/helpers/navigation_helper.rb"
         template "helpers/meta_tags_helper.rb", "app/helpers/meta_tags_helper.rb"

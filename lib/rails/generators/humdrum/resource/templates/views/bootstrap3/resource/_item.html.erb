@@ -3,8 +3,9 @@
 	
   <div class="pull-left">
     <%%= link_to <%= instance_name %>.<%= main_string_field %>, <%= resource_link('show', 'path') %>(<%= instance_name %>), :remote=>true, :class=>"text-color-blue font-size-16" %></br>
+    <div class="text-color-red font-size-12">Sub Title ...</div>
 	</div>
-  <div class="pull-right text-color-red font-size-12">
+  <div class="pull-right text-color-gray font-size-11">
     <%%= display_time(<%= instance_name %>.created_at) %>
   </div>
   

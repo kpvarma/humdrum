@@ -7,9 +7,37 @@
 
 <div class="box padding-10">
 	
-	<div class="margin-10 text-color-blue font-size-24">
-		<%%= @<%= instance_name %>.<%= main_string_field %> %>
-	</div>
+  <div class="row">
+    <div class="col-md-2">
+      <%%#= display_image(@admin) %>
+    </div>
+
+    <div class="col-md-10">
+      <div class="margin-left-10 text-color-blue font-size-24"><%%#= @admin.display_name %></div>
+      <div class="text-color-red font-size-16 margin-left-10"><%%#= @admin.user_type %></div>
+    </div>
+  </div>
+
+  <table class="table table-condensed table-hover table-striped margin-top-20">
+    <tbody>
+      <tr>
+        <td class="bold" style="width:30%;">Email</td>
+        <td><%%#= @admin.email %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Address</td>
+        <td><%%#= @admin.address %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Phone</td>
+        <td><%%#= @admin.phone %></td>
+      </tr>
+      <tr>
+        <td class="bold" style="width:30%;">Account Status</td>
+        <td><%%#= @admin.status.titleize %></td>
+      </tr>
+    </tbody>
+  </table>
   
   <%- string_fields.each do |name| -%>
     <%- next if name == main_string_field -%>
