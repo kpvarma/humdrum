@@ -11,10 +11,10 @@
 
 <%% else %>
 	
-	// Reload the form partial to display errors
-  $('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>"edit")) %>");
-  
-  // Validate the form
+  // Show the new form in the pop up form.
+  heading = "Edit <%= model_class.titleize %>";
+  bodyContent = "<%%= escape_javascript(render(:partial=>"form")) %>";
+  showModal(heading, bodyContent);
   validate<%= model_class %>Form();
   
   // Populate Server Side Errors

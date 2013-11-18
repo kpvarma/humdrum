@@ -1,4 +1,4 @@
-<%
+<%%
  	if request.xhr?
 		flash_message = flash.now[:success] || flash.now[:notice] || flash.now[:alert] || flash.now[:error]
 		style_classes = ""
@@ -15,9 +15,9 @@
 	
  %>
  
-<% unless flash_message.blank? %>
-  <div class="<%= style_classes %> alert <%= cls_name %> fade in margin-bottom-10" data-alert="alert">
+<%% unless flash_message.blank? %>
+  <div class="<%%= style_classes %> alert <%%= cls_name %> fade in margin-bottom-10" data-alert="alert">
     <a class="close" data-dismiss='alert' href="#">×</a>
-    <p><%= flash_message %></p>
+    <p><%%= flash_message %></p>
   </div>
-<% end %>
+<%% end %>

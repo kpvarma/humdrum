@@ -1,0 +1,12 @@
+<div class="btn-group margin-top-10 margin-bottom-10" style="width:100%;">
+  <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
+    Choose a <%= model_class.titleize %> <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <%% @<%= instances_name %>.each do |<%= instance_name %>| %>
+      <li><%%= link_to <%= instance_name %>.name, <%= resource_link('show', 'path') %>(<%= instance_name %>), :remote=>true %></li>
+    <%% end %>
+    <%%= content_tag :li, link_to_next_page(@<%= instances_name %>, 'Next Page', :remote => true) %>
+    <%%= content_tag :li, link_to_previous_page(@<%= instances_name %>, 'Previous Page', :remote => true) %>
+  </ul>
+</div>

@@ -41,6 +41,7 @@ module Humdrum
         template "views/#{framework}/resource/_field.html.erb", "app/views/#{controller_path}/_field.html.erb"
         template "views/#{framework}/resource/_form.html.erb", "app/views/#{controller_path}/_form.html.erb"
         template "views/#{framework}/resource/_index.html.erb", "app/views/#{controller_path}/_index.html.erb"
+        template "views/#{framework}/resource/_drop_down.html.erb", "app/views/#{controller_path}/_drop_down.html.erb"
         template "views/#{framework}/resource/_item.html.erb", "app/views/#{controller_path}/_item.html.erb"
         template "views/#{framework}/resource/_nav_filters.html.erb", "app/views/#{controller_path}/_nav_filters.html.erb"
         template "views/#{framework}/resource/_new.html.erb", "app/views/#{controller_path}/_new.html.erb"

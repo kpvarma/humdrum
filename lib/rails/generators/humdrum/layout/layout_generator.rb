@@ -79,7 +79,7 @@ module Humdrum
         unless options.skip_javascript?
           template "javascripts/application.js", "app/assets/javascripts/application.js"
           template "javascripts/validations/#{framework}/main.js", "app/assets/javascripts/validations/main.js"
-          copy_file "javascripts/modernizr.2.6.2.js", "app/assets/javascripts/modernizr.2.6.2.js"
+          #copy_file "javascripts/modernizr.2.6.2.js", "app/assets/javascripts/modernizr.2.6.2.js"
           case framework
           when "bootstrap3"
             copy_file "javascripts/bootstrap3/bootstrap.min.js", "app/assets/javascripts/bootstrap.min.js"

@@ -150,10 +150,11 @@ class <%= controller_class %> < ApplicationController
     respond_to do |format|
       ## Destroying the <%= instance_name %>
       @<%= instance_name %>.destroy
-      
+      @<%= instance_name %> = <%= model_class %>.new
+
       # Fetch the <%= instances_name %> to refresh ths list and details box
       get_collections
-      @<%= instance_name %> = @<%= instances_name %>.first
+      @<%= instance_name %> = @<%= instances_name %>.first if @<%= instances_name %> and @<%= instances_name %>.any?
       
       # Setting the flash message
       message = translate("forms.destroyed_successfully", :item => "<%= instance_name.titleize %>")
@@ -181,16 +182,7 @@ class <%= controller_class %> < ApplicationController
     
     if params[:query]
       @query = params[:query].strip
-      if !@query.blank?
-        relation = relation.where("
-<% string_fields_including_main_field.each_with_index do |sfield, i| -%>
-<% if string_fields_including_main_field.size - 1  != i -%>
-          LOWER(<%= sfield %>) LIKE LOWER('%#{@query}%') OR\
-<% else -%>
-          LOWER(<%= sfield %>) LIKE LOWER('%#{@query}%')")
-<% end -%>
-<% end -%>
-      end
+      relation = relation.search(@query) if !@query.blank?
     end
     
     @<%= instances_name %> = relation.order("created_at desc").page(@current_page).per(@per_page)

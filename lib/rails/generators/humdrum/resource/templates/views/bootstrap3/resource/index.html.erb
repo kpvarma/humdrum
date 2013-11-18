@@ -1,19 +1,27 @@
 
+<div class="cl-10 hidden-xs"></div>
+
 <%%# Displays to Manage the items %>
-<div class="<%= row_class %> padding-top-10 margin-left-0 margin-bottom-20">
-	<div class="font-size-22 col-md-6">Manage <%= model_class.pluralize %></div>
-	<div id="div_<%= instance_name %>_filters" class="col-md-6">
+<div class="<%= row_class %> margin-bottom-10">
+	<div class="font-size-22 col-sm-6 hidden-xs">Manage <%= model_class.pluralize %></div>
+	<div class="font-size-22 col-sm-6 text-align-center visible-xs">Manage <%= model_class.pluralize %></div>
+	<div id="div_<%= instance_name %>_filters" class="col-sm-6 hidden-xs">
 		<%%= render :partial=>"filters" %>
 	</div>
 </div>
 
+<div class="cl-10 hidden-xs"></div>
+
 <%%# Renders a partial to display all the <%= instances_name %> %>
 <div class="<%= row_class %>">
-	<div id="div_<%= instance_name %>_index" class="col-md-6">
+	<div id="div_<%= instance_name %>_index" class="col-sm-6 hidden-xs">
 		<%%= render :partial=>"index" %>
 	</div>
+	<div id="div_<%= instance_name %>_drop_down" class="col-xs-12 visible-xs">
+		<%%= render :partial=>"drop_down" %>
+	</div>
 
-	<div id="div_<%= instance_name %>_details" class="col-md-6">
+	<div id="div_<%= instance_name %>_details" class="col-xs-12 col-sm-6">
 		<%% case	params[:action] %>
 		<%% when "new", "edit", "show" %>
 			<%%= render :partial=>params[:action] %>

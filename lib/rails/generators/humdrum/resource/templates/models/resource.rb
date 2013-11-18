@@ -34,4 +34,19 @@ class <%= model_class %> < ActiveRecord::Base
   #belongs_to :user, foreign_key: :owner_id
   #has_many :products
   
+  # return an active record relation object with the search query in its where clause
+  # Return the ActiveRecord::Relation object
+  # == Examples
+  #   >>> <%= instance_name %>.search(query)
+  #   => ActiveRecord::Relation object
+  scope :search, lambda {|query| where("
+<% string_fields_including_main_field.each_with_index do |sfield, i| -%>
+<% if string_fields_including_main_field.size - 1  != i -%>
+                                            LOWER(<%= sfield %>) LIKE LOWER('%#{query}%') OR\
+<% else -%>
+                                            LOWER(<%= sfield %>) LIKE LOWER('%#{query}%')")
+<% end -%>
+<% end -%>
+                        }
+  
 end

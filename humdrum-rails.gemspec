@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
   gem.homepage    = "http://github.com/humdrum"
   gem.description   = %q{humdrum-rails is a collection of useful generators which are quite handy for starting up a project in ruby on railgem.}
-  gem.summary       = %q{humdrum-rails creates layouts using bootstrap, HTML5boilerplate, modernizer etc to kick start a project.}
+  gem.summary       = %q{humdrum-rails creates layouts using bootstrap, HTML5boilerplate etc to kick start a project.}
   
   gem.rubyforge_project  = "humdrum"
   

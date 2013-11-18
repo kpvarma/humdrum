@@ -9,32 +9,28 @@
 	
   <div class="row">
     <div class="col-md-2">
-      <%%#= display_image(@admin) %>
+      <%%#= display_image(@<%= instance_name %>) %>
     </div>
 
     <div class="col-md-10">
-      <div class="margin-left-10 text-color-blue font-size-24"><%%#= @admin.display_name %></div>
-      <div class="text-color-red font-size-16 margin-left-10"><%%#= @admin.user_type %></div>
+      <div class="margin-left-10 text-color-blue font-size-24"><%%#= @<%= instance_name %>.display_name %></div>
+      <div class="text-color-red font-size-16 margin-left-10"><%%#= @<%= instance_name %>.user_type %></div>
     </div>
   </div>
 
   <table class="table table-condensed table-hover table-striped margin-top-20">
     <tbody>
       <tr>
-        <td class="bold" style="width:30%;">Email</td>
-        <td><%%#= @admin.email %></td>
+        <td class="bold" style="width:30%;">Id</td>
+        <td><%%= @<%= instance_name %>.id %></td>
       </tr>
       <tr>
-        <td class="bold" style="width:30%;">Address</td>
-        <td><%%#= @admin.address %></td>
+        <td class="bold" style="width:30%;">Created at</td>
+        <td><%%= display_time(@<%= instance_name %>.created_at, "text-color-grey") %></td>
       </tr>
       <tr>
-        <td class="bold" style="width:30%;">Phone</td>
-        <td><%%#= @admin.phone %></td>
-      </tr>
-      <tr>
-        <td class="bold" style="width:30%;">Account Status</td>
-        <td><%%#= @admin.status.titleize %></td>
+        <td class="bold" style="width:30%;">Last updated at</td>
+        <td><%%= display_time(@<%= instance_name %>.updated_at, "text-color-grey") %></td>
       </tr>
     </tbody>
   </table>
@@ -61,7 +57,6 @@
   <div class="cl-20"></div>
   
   <div class="palette-footer margin-left-10">
-    <%%= display_time(@<%= instance_name %>.created_at, "pull-left text-color-grey") %>
     <%%= link_to raw("<i class=\"icon-pencil icon-white margin-right-5\"></i> Edit"), <%= resource_link('edit', 'path') %>(@<%= instance_name %>), :class=>"btn btn-default btn-xs pull-right margin-left-10", :remote=>true %>
     <%%= link_to raw("<i class=\"icon-remove \"></i> Delete"), <%= resource_link('destroy', 'path') %>(@<%= instance_name %>), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right", :remote=>true %>
     <div class="cl-10"></div>

@@ -38,7 +38,7 @@
       <span class="text-color-red margin-left-10 margin-right-5 pull-right"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
     </label>
     <div class="col-md-8">
-      <textarea name="<%%= object_name %>[<%%= field_name %>]" class="textarea input form-control" id="inp_<%%= display_name.underscore.split(" ").join("_") %> placeholder="<%%= place_holder %>" "><%%= object.send(field_name.to_s) %></textarea>
+      <textarea name="<%%= object_name %>[<%%= field_name %>]" style="height:200px;" class="textarea input form-control" id="inp_<%%= display_name.underscore.split(" ").join("_") %> placeholder="<%%= place_holder %>" "><%%= object.send(field_name.to_s) %></textarea>
     </div>
     
   <%% end %>
