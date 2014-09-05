@@ -22,12 +22,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency(%q<colorize>, ["~> 0.7.3"])
-
-  gem.add_development_dependency 'rails', '~> 4.1.5'
-  gem.add_development_dependency 'rainbow'
-  gem.add_development_dependency 'rainbow'
-  gem.add_development_dependency 'handy-css-rails', '0.0.4'
-
+  gem.add_runtime_dependency 'colorize', '~> 0.7', '>= 0.7.3'
+  gem.add_development_dependency 'rails', '~> 3.0', '>= 3.0.0'
+  gem.add_development_dependency 'rainbow', '~> 1.1.4', '>= 1.1.4'
+  gem.add_development_dependency 'handy-css-rails', '~> 0.0.4', '>= 0.0.4'
 
 end
