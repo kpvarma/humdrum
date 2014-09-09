@@ -1,9 +1,9 @@
 
 <%%# Displays to Manage the items %>
-<div class="<%= row_class %> padding-top-10 margin-left-0">
+<div class="<%= row_class %> pt-10 ml-0">
 
   <div class="six columns">
-    <%%= content_tag :span, "Manage <%= model_class.pluralize %>", :class=>"font-size-24 bold text-color-grey" %>
+    <%%= content_tag :span, "Manage <%= model_class.pluralize %>", :class=>"fs-24 bold text-color-grey" %>
   </div>
 
 	<div id="div_<%= instance_name %>_filters" class="six columns">
@@ -21,17 +21,17 @@
 		<%% case	params[:action] %>
 		<%% when "new", "edit", "show" %>
 			<%%= render :partial=>params[:action] %>
-		<%% when "index" %>	
+		<%% when "index" %>
 			<%% if @<%= instances_name %>.empty? %>
 				<%%= render :partial=>"summary" %>
 			<%% else %>
-				<%%= render :partial=>"show" %>	
+				<%%= render :partial=>"show" %>
 			<%% end %>
 		<%% else %>
-			<%%= render :partial=>"summary" %>	
+			<%%= render :partial=>"summary" %>
 		<%% end %>
 	</div>
-	
+
 </div>
 
 

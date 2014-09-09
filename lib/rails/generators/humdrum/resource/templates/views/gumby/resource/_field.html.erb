@@ -1,4 +1,4 @@
-<%% 
+<%%
   unless defined?(required)
     required = false
   end
@@ -13,7 +13,7 @@
 <div class="row">
   <%% if ["text", "email", "search", "password", "date", "time", "tel", "url", "month", "file", "image", ""].include?(input_type) %>
     <div class="five columns">
-      <span class="text-color-red pull-right margin-left-10 margin-right-5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
+      <span class="text-color-red pull-right ml-10 mr--5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
       <label class="pull-right <%%= label_class %>" for="<%%= inp_id %>" ><%%= display_name %></label>
     </div>
     <div class="seven columns">
@@ -23,18 +23,18 @@
     </div>
   <%% elsif input_type == "checkbox" %>
     <div class="five columns">
-      <span class="text-color-red pull-right margin-left-10 margin-right-5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
+      <span class="text-color-red pull-right ml-10 mr--5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
       <label class="pull-right <%%= label_class %>" for="<%%= inp_id %>" ><%%= display_name %></label>
     </div>
-    <div class="seven columns margin-bottom-10">
-      <input name="<%%= object_name %>[<%%= field_name %>]" id="inp_<%%= display_name.underscore.split(" ").join("_") %>" type="<%%= input_type %>" class="checkbox input pull-left margin-5" <%%= object.send(field_name.to_s) ? "checked='checked'" : "" %> />
+    <div class="seven columns mb-10">
+      <input name="<%%= object_name %>[<%%= field_name %>]" id="inp_<%%= display_name.underscore.split(" ").join("_") %>" type="<%%= input_type %>" class="checkbox input pull-left m-5" <%%= object.send(field_name.to_s) ? "checked='checked'" : "" %> />
     </div>
   <%% elsif input_type == "textarea" %>
     <div class="five columns">
-      <span class="text-color-red pull-right margin-left-10 margin-right-5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
+      <span class="text-color-red pull-right ml-10 mr--5"><%%= required ? "*" : raw("&nbsp;&nbsp;") %></span>
       <label class="pull-right <%%= label_class %>" for="<%%= inp_id %>" ><%%= display_name %></label>
     </div>
-    <div class="seven columns margin-bottom-10">
+    <div class="seven columns mb-10">
       <textarea name="<%%= object_name %>[<%%= field_name %>]" id="inp_<%%= display_name.underscore.split(" ").join("_") %> placeholder="<%%= place_holder %>" "><%%= object.send(field_name.to_s) %></textarea>
     </div>
   <%% end %>

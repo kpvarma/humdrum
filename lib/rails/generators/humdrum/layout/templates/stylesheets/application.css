@@ -9,12 +9,13 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ * handycss is a bunch of handy CSS which can be used directly in any project, developed with SCSS
+ * Chekcout https://github.com/kpvarma/handyCSS and https://github.com/kpvarma/handy-css-rails
+ *= require handycss.css
+ * require handycss.box.css
+ * require handycss.backdrops.css
 
- *= require handyCSS.css
- * require handyCSS.box.css
- * require handyCSS.backdrops.css
-
-<% case framework 
+<% case framework
    when "bootstrap3" -%>
  * require bootstrap-rails (Alternatively you can use the bootstrap3-rails gem)
  *= require bootstrap

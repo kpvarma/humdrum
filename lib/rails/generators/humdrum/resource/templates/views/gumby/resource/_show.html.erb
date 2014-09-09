@@ -5,12 +5,12 @@
 	<%%= render :partial=>"layouts/common/flash_message" %>
 <%% end %>
 
-<div class="box padding-10">
-	
-	<div class="margin-10 text-color-blue font-size-24">
+<div class="box p-10">
+
+	<div class="m-10 text-color-blue fs-24">
 		<%%= @<%= instance_name %>.<%= main_string_field %> %>
 	</div>
-  
+
   <%- string_fields.each do |name| -%>
     <%- next if name == main_string_field -%>
 	<div class="row">
@@ -18,40 +18,40 @@
 		<%%= content_tag :span, @<%= instance_name %>.<%= name %>, :class=>"six columns ext-color-grey" %>
 	</div>
 	<%- end -%>
-  
+
 	<%- string_fields.each do |name| -%>
 		<% next if name == main_string_field %>
-	<div class="margin-left-10">
+	<div class="ml-10">
 		<%= name.titleize %>: <%%= link_to @<%= instance_name %>.<%= name %>, "#", :class=>"text-color-red" %>
 	</div>
 	<%- end -%>
 	<% puts fields %>
 	<%- fields.map{|name, type| name unless ["text", "string"].include?(type)}.compact.uniq.each do |name| -%>
-	<div class="margin-left-10">
+	<div class="ml-10">
 		<%= name.titleize %>: <%%= @<%= instance_name %>.<%= name %> %>
 	</div>
 	<%- end -%>
-	
+
 	<%- text_fields.each do |name| -%>
-	<div class='italic margin-10'><%%= simple_format @<%= instance_name %>.<%= name %> %></div>
+	<div class='italic m-10'><%%= simple_format @<%= instance_name %>.<%= name %> %></div>
 	<%- end -%>
-	
+
   <div class="cl-20"></div>
-  
-  <div class="palette-footer margin-left-10">
-  
-    <div class="pull-left text-color-red font-size-12">
+
+  <div class="palette-footer ml-10">
+
+    <div class="pull-left text-color-red fs-12">
       <%%= display_time(@<%= instance_name %>.created_at) %>
     </div>
-    
-    <%%= content_tag :div, :class=>"pretty small danger btn icon-left icon-trash margin-left-10 pull-right" do %>
+
+    <%%= content_tag :div, :class=>"pretty small danger btn icon-left icon-trash ml-10 pull-right" do %>
       <%%= link_to "Delete", <%= resource_link('destroy', 'path') %>(@<%= instance_name %>), method: :delete, data: { confirm: 'Are you sure?' }, :remote=>true %>
     <%% end %>
-    
-    <%%= content_tag :div, :class=>"pretty small medium primary btn icon-left icon-pencil margin-left-10 pull-right" do %>
+
+    <%%= content_tag :div, :class=>"pretty small medium primary btn icon-left icon-pencil ml-10 pull-right" do %>
       <%%= link_to "Edit", <%= resource_link('edit', 'path') %>(@<%= instance_name %>), :remote=>true %>
     <%% end %>
-    
+
     <div class="cl-10"></div>
   </div>
 

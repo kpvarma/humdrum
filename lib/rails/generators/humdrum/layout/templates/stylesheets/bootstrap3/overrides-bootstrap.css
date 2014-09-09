@@ -1,12 +1,15 @@
-body { padding: 30px; }
+body { padding: 5px; }
 
 .navbar { margin-bottom: 0px; }
 
 .alert { padding:10px; }
 
 .container {
-	padding-right: 5px;
-	padding-left: 5px;
-	margin-right: auto;
-	margin-left: auto;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: auto;
+  margin-left: auto;
 }
+
+.dropdown-menu.align-right {left: -65%;}
+.box .row {margin: 0px !important}

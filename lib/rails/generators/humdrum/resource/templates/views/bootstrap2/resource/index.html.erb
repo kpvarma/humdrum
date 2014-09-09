@@ -1,7 +1,7 @@
 
 <%%# Displays to Manage the items %>
-<div class="<%= row_class %> padding-top-10 margin-left-0">
-	<div class="font-size-22 pull-left">Manage <%= model_class.pluralize %></div>
+<div class="<%= row_class %> pt-10 ml-0">
+	<div class="fs-22 pull-left">Manage <%= model_class.pluralize %></div>
 	<div id="div_<%= instance_name %>_filters pull-right">
 		<%%= render :partial=>"filters" %>
 	</div>
@@ -17,17 +17,17 @@
 		<%% case	params[:action] %>
 		<%% when "new", "edit", "show" %>
 			<%%= render :partial=>params[:action] %>
-		<%% when "index" %>	
+		<%% when "index" %>
 			<%% if @<%= instances_name %>.empty? %>
 				<%%= render :partial=>"summary" %>
 			<%% else %>
-				<%%= render :partial=>"show" %>	
+				<%%= render :partial=>"show" %>
 			<%% end %>
 		<%% else %>
-			<%%= render :partial=>"summary" %>	
+			<%%= render :partial=>"summary" %>
 		<%% end %>
 	</div>
-	
+
 </div>
 
 

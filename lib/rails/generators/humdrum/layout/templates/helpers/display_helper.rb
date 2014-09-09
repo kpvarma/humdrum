@@ -1,5 +1,5 @@
 module DisplayHelper
-  
+
   def scrap_word(text, char_count_limit, more_text = nil, more_link = nil,style='')
     # remove HTML tags
     text = text.to_s.gsub(/<\/?[^>]*>/, " ")
@@ -26,17 +26,9 @@ module DisplayHelper
     end
     return teaser
   end
-  
-  def display_time(disp_time, class_name = nil)
+
+  def display_time(disp_time, class_name="")
     return distance_of_time_in_words_to_now(disp_time) + " ago"
-    # return_str = ""
-    # if ((Time.now - disp_time) < (6*24*60*60))
-    #   return_str = distance_of_time_in_words_to_now(disp_time) + " ago"
-    # else
-    #   return_str = "#{disp_time.strftime('%m/%d/%y')}"
-    # end
-    # 
-    # return content_tag("span", return_str, :class => (class_name.nil? ? "text-color-grey" : class_name))
   end
-  
+
 end

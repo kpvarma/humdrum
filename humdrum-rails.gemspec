@@ -25,6 +25,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'colorize', '~> 0.7', '>= 0.7.3'
   gem.add_development_dependency 'rails', '~> 3.0', '>= 3.0.0'
   gem.add_development_dependency 'rainbow', '~> 1.1.4', '>= 1.1.4'
-  gem.add_development_dependency 'handy-css-rails', '~> 0.0.5', '>= 0.0.5'
+  gem.add_development_dependency 'handy-css-rails', '~> 0.0.7', '>= 0.0.7'
 
 end

@@ -1,7 +1,7 @@
-<%%= link_to raw("<i class='icon-plus icon-white margin-right-5'></i> New Item"), <%= resource_link('new', 'path') %>, :class=>"btn btn-warning pull-right margin-left-10", :remote=>true %>
+<%%= link_to raw("<i class='icon-plus icon-white mr--5'></i> New Item"), <%= resource_link('new', 'path') %>, :class=>"btn btn-warning pull-right ml-10", :remote=>true %>
 
 <%# Used to add a search functionality %>
-<%%= form_for <%= model_class %>.new, :url => <%= resource_link('index', 'path') %>, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"margin-bottom:0px;"} do |f| %>
+<%%= form_for <%= model_class %>.new, :url => <%= resource_link('index', 'path') %>, :method => :get, :remote=>true, :html=>{:class=>"pull-right", :style=>"m-bottom:0px;"} do |f| %>
 	<div class="input-append">
 	  <input type="text" style="width:160px;" name="item[query]" placeholder="Search Item ...">
 	  <button type="submit" class="btn btn-inverse"><i class="icon-search icon-white"></i></button>

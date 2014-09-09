@@ -2,13 +2,13 @@
 
 	// Fill the right box with first <%= instance_name %> details in the list
 	$('#div_<%= instance_name %>_details').html("<%%= escape_javascript(render(:partial=>'show')) %>");
-	
+
 	// Rendering the item list
 	$('#div_<%= instance_name %>_collections').html("<%%= escape_javascript(render(:partial=>"index")) %>");
-	
+
 <%% else %>
 
-	var noResultsText = "<div class='box padding-10' style='height:200px;'>No results found.</div>";
+	var noResultsText = "<div class='box p-10' style='height:200px;'>No results found.</div>";
 	$('#div_<%= instance_name %>_list').html(noResultsText);
 	$('#div_<%= instance_name %>_list').html(noResultsText);
 

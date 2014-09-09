@@ -1,23 +1,23 @@
 <%%# describes about each <%= instance_name %> %>
-<div class="box hoverable padding-10 box-border-black">
-	
+<div class="box hoverable p-10 box-border-black">
+
   <div class="row">
-    <div class="col-md-4 visible-md visible-lg">
-      <%%= display_image(<%= instance_name %>, :photo, "100%") %>
+    <div class="col-md-2 visible-md visible-lg">
+      <%%= display_image(<%= instance_name %>, :photo, "75%") %>
     </div>
-    <div class="col-md-8">
-      <%%= link_to <%= instance_name %>.name, <%= resource_link('show', 'path') %>(<%= instance_name %>), 
-          :remote=>true, :class=>"text-color-blue font-size-16" %><br/>
-      <div class="text-color-gray font-size-12"><%%#= scrap_word(<%= instance_name %>.<%= text_fields.any? ? text_fields.first : "description" %>, 160) %></div>
+    <div class="col-md-10">
+      <%%= link_to <%= instance_name %>.id, <%= resource_link('show', 'path') %>(<%= instance_name %>),
+          :remote=>true, :class=>"heading3" %><br/>
+
+      <div class="content"><%%#= scrap_word(<%= instance_name %>.<%= text_fields.any? ? text_fields.first : "description" %>, 160) %></div>
+
+      <div class="mt-10 pull-right text-color-gray fs-11 visible-md visible-lg">
+        <%%= display_time(<%= instance_name %>.created_at) %>
+      </div>
   	</div>
   </div>
-  
-  <div class="margin-top-10 pull-right text-color-gray font-size-11 visible-md visible-lg">
-    <%%= display_time(<%= instance_name %>.created_at) %>
-  </div>
-  
+
   <div class="cl"></div>
-	
-  
+
 </div>
 
