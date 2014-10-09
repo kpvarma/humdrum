@@ -44,6 +44,8 @@ We will now see how humdrum can help us in setting up a project quickly.
 
 $ rails g humdrum:setup --config-database --dbase_name=my_rails_app --db_username=kpvarma --password=password1234 --rbenv_gemsets=my_rails_app
 
+rails g humdrum:setup
+
 Type **Y** for all the questions and you will see something like this:
 
 remove  public/index.html
@@ -137,7 +139,15 @@ Take a browser and hit http://localhost:3000 and chekc out.
 
 ### STEP 5: Create a resource using humdrum
 
-$ rails g humdrum:resource users/documents name:string --fluid --framework=bootstrap3
+$ rails g humdrum:resource users/document name:string --fluid --framework=bootstrap3
+
+rails g humdrum:resource super_admin/admin name:string username:string status:string email:string phone:string address:string description:text password_digest:string auth_token:string --fluid --framework=bootstrap3
+rails g humdrum:resource super_admin/trust name:string status:string email:string phone:string address:string description:text --fluid --framework=bootstrap3
+
+rails g humdrum:resource admin/temple name:string description:text trust_id:integer --fluid --framework=bootstrap3
+
+rails g humdrum:resource admin/deity name:string description:text temple_id:integer trust_id:integer --fluid --framework=bootstrap3
+rails g humdrum:resource admin/offering name:string description:text temple_id:integer trust_id:integer --fluid --framework=bootstrap3
 
 
 This will create layouts compatible with bootstrap3 for quick start. This will also create a welcome page (landing page) which is linked as root url in routes.rb.
